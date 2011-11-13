@@ -33,29 +33,7 @@ public class SuperMarioLand extends Game {
 	}
 
 	@Override
-	public void preInit(String lvl_name, String tilesPropertyName) {
-		Loader.getInstance().setImages(new String[]{
-			"blockcoin.png",
-			"bonusblock.png",
-			"coin.png",
-			"fly.png",
-			"gumba.png",
-			"jumpman.png",
-			"koopa.png",
-			"sml_tiles.png"
-		});
-		Loader.getInstance().setSounds(new String[]{
-			"coin",
-			"die",
-			"jump",
-			"stomp",
-		});
-		Loader.getInstance().setMusics(new String[]{"level1"});
-		Loader.getInstance().setMaps(new String[]{"level.map"});
-	}
-
-	@Override
-	public void postInit() {
+	public void init() {
 		tileColissions = new boolean[140];
 		for (int i = 0; i < 140; ++i) tileColissions[i] = isCollidable(i);
 		originalmap = Loader.getInstance().getMap("level.map");
