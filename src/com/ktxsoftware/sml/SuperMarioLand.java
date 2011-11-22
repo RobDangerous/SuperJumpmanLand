@@ -24,7 +24,7 @@ public class SuperMarioLand extends Game {
 	private Mode mode = Mode.Game;
 	
 	public SuperMarioLand() {
-		super("level.map", "none", 600, 520);
+		super(600, 520);
 		instance = this;
 	}
 	
