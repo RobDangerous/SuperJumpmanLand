@@ -2,3 +2,10 @@
 /.classpath
 /.project
 /bin
+/assets
+/res
+/.settings
+/AndroidManifest.xml
+/proguard.cfg
+/project.properties
+/gen
