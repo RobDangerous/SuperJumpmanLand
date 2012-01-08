@@ -1,6 +1,6 @@
-[submodule "Kje"]
-	path = Kje
-	url = https://git.ktxsoftware.com/git/Kje.git
 [submodule "Kt"]
 	path = Kt
 	url = https://git.ktxsoftware.com/git/Kt.git
+[submodule "Kha"]
+	path = Kha
+	url = https://git.ktxsoftware.com/git/Kha.git
