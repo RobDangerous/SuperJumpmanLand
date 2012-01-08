@@ -1,7 +1,7 @@
 package com.ktxsoftware.sml;
 
-import com.ktxsoftware.kje.Scene;
-import com.ktxsoftware.kje.Sprite;
+import com.ktxsoftware.kha.Scene;
+import com.ktxsoftware.kha.Sprite;
 
 class Exit extends Sprite {
 	public function new(x : Int, y : Int) {

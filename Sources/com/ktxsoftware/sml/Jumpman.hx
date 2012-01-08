@@ -1,12 +1,12 @@
 package com.ktxsoftware.sml;
 
-import com.ktxsoftware.kje.Animation;
-import com.ktxsoftware.kje.Direction;
-import com.ktxsoftware.kje.Loader;
-import com.ktxsoftware.kje.Music;
-import com.ktxsoftware.kje.Rectangle;
-import com.ktxsoftware.kje.Sound;
-import com.ktxsoftware.kje.Sprite;
+import com.ktxsoftware.kha.Animation;
+import com.ktxsoftware.kha.Direction;
+import com.ktxsoftware.kha.Loader;
+import com.ktxsoftware.kha.Music;
+import com.ktxsoftware.kha.Rectangle;
+import com.ktxsoftware.kha.Sound;
+import com.ktxsoftware.kha.Sprite;
 
 class Jumpman extends Sprite {
 	static var instance : Jumpman;

@@ -1,12 +1,12 @@
 package com.ktxsoftware.sml;
 
-import com.ktxsoftware.kje.Animation;
-import com.ktxsoftware.kje.Image;
-import com.ktxsoftware.kje.Loader;
-import com.ktxsoftware.kje.Rectangle;
-import com.ktxsoftware.kje.Scene;
-import com.ktxsoftware.kje.Sound;
-import com.ktxsoftware.kje.Sprite;
+import com.ktxsoftware.kha.Animation;
+import com.ktxsoftware.kha.Image;
+import com.ktxsoftware.kha.Loader;
+import com.ktxsoftware.kha.Rectangle;
+import com.ktxsoftware.kha.Scene;
+import com.ktxsoftware.kha.Sound;
+import com.ktxsoftware.kha.Sprite;
 
 class BonusBlock extends Sprite {
 	static var image : Image;

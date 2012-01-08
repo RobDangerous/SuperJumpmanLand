@@ -1,9 +1,9 @@
 package com.ktxsoftware.sml;
 
-import com.ktxsoftware.kje.Image;
-import com.ktxsoftware.kje.Loader;
-import com.ktxsoftware.kje.Scene;
-import com.ktxsoftware.kje.Sprite;
+import com.ktxsoftware.kha.Image;
+import com.ktxsoftware.kha.Loader;
+import com.ktxsoftware.kha.Scene;
+import com.ktxsoftware.kha.Sprite;
 
 class BlockCoin extends Sprite {
 	static var image : Image;

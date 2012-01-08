@@ -1,15 +1,15 @@
 package com.ktxsoftware.sml;
 
-import com.ktxsoftware.kje.Color;
-import com.ktxsoftware.kje.Game;
-import com.ktxsoftware.kje.HighscoreList;
-import com.ktxsoftware.kje.KeyEvent;
-import com.ktxsoftware.kje.Loader;
-import com.ktxsoftware.kje.Music;
-import com.ktxsoftware.kje.Painter;
-import com.ktxsoftware.kje.Scene;
-import com.ktxsoftware.kje.Score;
-import com.ktxsoftware.kje.Tilemap;
+import com.ktxsoftware.kha.Color;
+import com.ktxsoftware.kha.Game;
+import com.ktxsoftware.kha.HighscoreList;
+import com.ktxsoftware.kha.KeyEvent;
+import com.ktxsoftware.kha.Loader;
+import com.ktxsoftware.kha.Music;
+import com.ktxsoftware.kha.Painter;
+import com.ktxsoftware.kha.Scene;
+import com.ktxsoftware.kha.Score;
+import com.ktxsoftware.kha.Tilemap;
 
 enum Mode {
 	Game;

@@ -1,10 +1,10 @@
 package com.ktxsoftware.sml;
 
-import com.ktxsoftware.kje.Animation;
-import com.ktxsoftware.kje.Direction;
-import com.ktxsoftware.kje.Image;
-import com.ktxsoftware.kje.Loader;
-import com.ktxsoftware.kje.Scene;
+import com.ktxsoftware.kha.Animation;
+import com.ktxsoftware.kha.Direction;
+import com.ktxsoftware.kha.Image;
+import com.ktxsoftware.kha.Loader;
+import com.ktxsoftware.kha.Scene;
 
 class Gumba extends Enemy {
 	static var image : Image;
