@@ -41,7 +41,16 @@ class SuperMarioLand extends Game {
 	public override function init() {
 		tileColissions = new Array<Bool>();
 		for (i in 0...140) tileColissions.push(isCollidable(i));
-		originalmap = Loader.getInstance().getMap("level.map");
+		var blob = Loader.getInstance().getBlob("level.map");
+		var levelWidth : Int = blob.readInt();
+		var levelHeight : Int = blob.readInt();
+		originalmap = new Array<Array<Int>>();
+		for (x in 0...levelWidth) {
+			originalmap.push(new Array<Int>());
+			for (y in 0...levelHeight) {
+				originalmap[x].push(blob.readInt());
+			}
+		}
 		map = new Array<Array<Int>>();
 		for (x in 0...originalmap.length) {
 			map.push(new Array<Int>());

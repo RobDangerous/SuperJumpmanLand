@@ -12,5 +12,5 @@
 <sound>jump</sound>
 <sound>stomp</sound>
 <music>level1</music>
-<map>level.map</map>
+<blob>level.map</blob>
 </data>
