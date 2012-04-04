@@ -51,11 +51,11 @@ class Koopa extends Enemy {
 		killcount = anim.length * 14;
 	}
 	
-	public override function hit(sprite : Sprite){
-		if(killcount > 0 && killcount < 2 * 14){
+	public override function hit(sprite : Sprite) {
+		if (killcount > 0 && killcount < 2 * 14) {
 			Jumpman.getInstance().die();
 		}
-		else{
+		else {
 			super.hit(sprite);
 		}
 	}
