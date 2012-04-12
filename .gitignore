@@ -1,15 +1,3 @@
 
-/.classpath
-/.project
-/bin
-/assets
-/res
-/.settings
-/AndroidManifest.xml
-/proguard.cfg
-/project.properties
-/gen
-/war
-/gwt-unitCache
 /build
 /kake.js
