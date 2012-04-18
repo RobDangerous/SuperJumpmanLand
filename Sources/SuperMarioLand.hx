@@ -1,15 +1,15 @@
-package com.ktxsoftware.sml;
+package;
 
-import com.ktxsoftware.kha.Color;
-import com.ktxsoftware.kha.Game;
-import com.ktxsoftware.kha.HighscoreList;
-import com.ktxsoftware.kha.KeyEvent;
-import com.ktxsoftware.kha.Loader;
-import com.ktxsoftware.kha.Music;
-import com.ktxsoftware.kha.Painter;
-import com.ktxsoftware.kha.Scene;
-import com.ktxsoftware.kha.Score;
-import com.ktxsoftware.kha.Tilemap;
+import kha.Color;
+import kha.Game;
+import kha.HighscoreList;
+import kha.KeyEvent;
+import kha.Loader;
+import kha.Music;
+import kha.Painter;
+import kha.Scene;
+import kha.Score;
+import kha.Tilemap;
 
 enum Mode {
 	Game;
@@ -28,7 +28,7 @@ class SuperMarioLand extends Game {
 	var mode : Mode;
 	
 	public function new() {
-		super(600, 520);
+		super("SML", 600, 520);
 		instance = this;
 		highscoreName = "";
 		mode = Mode.Game;
@@ -156,8 +156,8 @@ class SuperMarioLand extends Game {
 			painter.fillRect(0, 0, getWidth(), getHeight());
 			painter.setColor(0, 0, 0);
 			var i : Int = 0;
-			while (i < 10 && i < HighscoreList.getInstance().getScores().length) {
-				var score : Score = HighscoreList.getInstance().getScores()[i];
+			while (i < 10 && i < getHighscores().getScores().length) {
+				var score : Score = getHighscores().getScores()[i];
 				painter.drawString(Std.string(i + 1) + ": " + score.getName(), 100, i * 30 + 100);
 				painter.drawString(" -           " + Std.string(score.getScore()), 200, i * 30 + 100);
 				++i;
@@ -197,7 +197,7 @@ class SuperMarioLand extends Game {
 			if (highscoreName.length > 0) {
 				switch (event.key) {
 				case ENTER:
-					HighscoreList.getInstance().addScore(highscoreName, Jumpman.getInstance().getScore());
+					getHighscores().addScore(highscoreName, Jumpman.getInstance().getScore());
 					mode = Mode.Highscore;
 				case BACKSPACE:
 					highscoreName = highscoreName.substr(0, highscoreName.length - 1);

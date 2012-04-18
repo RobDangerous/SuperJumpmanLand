@@ -1,7 +1,7 @@
-package com.ktxsoftware.sml;
+package;
 
-import com.ktxsoftware.kha.Image;
-import com.ktxsoftware.kha.Sprite;
+import kha.Image;
+import kha.Sprite;
 
 class Enemy extends Sprite {
 	var killed : Bool;

@@ -1,7 +1,6 @@
 package ;
 
-import com.ktxsoftware.kha.Starter;
-import com.ktxsoftware.sml.SuperMarioLand;
+import kha.Starter;
 
 class Main {
 	public static function main() {

@@ -1,10 +1,10 @@
-package com.ktxsoftware.sml;
+package;
 
-import com.ktxsoftware.kha.Animation;
-import com.ktxsoftware.kha.Direction;
-import com.ktxsoftware.kha.Image;
-import com.ktxsoftware.kha.Loader;
-import com.ktxsoftware.kha.Rectangle;
+import kha.Animation;
+import kha.Direction;
+import kha.Image;
+import kha.Loader;
+import kha.Rectangle;
 
 class Fly extends Enemy {
 	static var image : Image;

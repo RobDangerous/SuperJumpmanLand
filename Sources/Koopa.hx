@@ -1,12 +1,12 @@
-package com.ktxsoftware.sml;
+package;
 
-import com.ktxsoftware.kha.Animation;
-import com.ktxsoftware.kha.Direction;
-import com.ktxsoftware.kha.Image;
-import com.ktxsoftware.kha.Loader;
-import com.ktxsoftware.kha.Rectangle;
-import com.ktxsoftware.kha.Scene;
-import com.ktxsoftware.kha.Sprite;
+import kha.Animation;
+import kha.Direction;
+import kha.Image;
+import kha.Loader;
+import kha.Rectangle;
+import kha.Scene;
+import kha.Sprite;
 
 class Koopa extends Enemy {
 	static var image : Image;
