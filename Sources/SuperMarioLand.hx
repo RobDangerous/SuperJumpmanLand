@@ -1,9 +1,10 @@
 package;
 
+import kha.Button;
 import kha.Color;
 import kha.Game;
 import kha.HighscoreList;
-import kha.KeyEvent;
+import kha.Key;
 import kha.Loader;
 import kha.Music;
 import kha.Painter;
@@ -24,12 +25,14 @@ class SuperMarioLand extends Game {
 	var map : Array<Array<Int>>;
 	var originalmap : Array<Array<Int>>;
 	var highscoreName : String;
+	var shiftPressed : Bool;
 	
 	var mode : Mode;
 	
 	public function new() {
 		super("SML", 600, 520);
 		instance = this;
+		shiftPressed = false;
 		highscoreName = "";
 		mode = Mode.Game;
 	}
@@ -180,22 +183,47 @@ class SuperMarioLand extends Game {
 		}
 	}
 
-	public override function key(event : KeyEvent) {
+	override public function buttonDown(button : Button) : Void {
 		switch (mode) {
 		case Game:
-			switch (event.key) {
+			switch (button) {
 			case UP:
-				if (event.down) Jumpman.getInstance().setUp();
-				else Jumpman.getInstance().up = event.down;
+				Jumpman.getInstance().setUp();
 			case LEFT:
-				Jumpman.getInstance().left = event.down;
+				Jumpman.getInstance().left = true;
 			case RIGHT:
-				Jumpman.getInstance().right = event.down;
+				Jumpman.getInstance().right = true;
 			default:
 			}
-		case EnterHighscore:
+		default:
+		}
+	}
+	
+	override public function buttonUp(button : Button) : Void {
+		switch (mode) {
+		case Game:
+			switch (button) {
+			case UP:
+				Jumpman.getInstance().up = false;
+			case LEFT:
+				Jumpman.getInstance().left = false;
+			case RIGHT:
+				Jumpman.getInstance().right = false;
+			default:
+			}	
+		default:
+		}
+	}
+	
+	override public function keyDown(key : Key, char : String) : Void {
+		if (key == null) {
+			if (mode == Mode.EnterHighscore) {
+				if (highscoreName.length < 20) highscoreName += shiftPressed ? char.toUpperCase() : char.toLowerCase();
+			}
+		}
+		else {
 			if (highscoreName.length > 0) {
-				switch (event.key) {
+				switch (key) {
 				case ENTER:
 					getHighscores().addScore(highscoreName, Jumpman.getInstance().getScore());
 					mode = Mode.Highscore;
@@ -204,13 +232,11 @@ class SuperMarioLand extends Game {
 				default:
 				}
 			}
-		default:
+			if (key == SHIFT) shiftPressed = true;
 		}
 	}
 	
-	public override function charKey(c : String) {
-		if (mode == Mode.EnterHighscore) {
-			if (highscoreName.length < 20) highscoreName += c;
-		}
+	override public function keyUp(key : Key, char : String) : Void {
+		if (key != null && key == Key.SHIFT) shiftPressed = false;
 	}
 }
