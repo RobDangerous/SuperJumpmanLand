@@ -187,7 +187,7 @@ class SuperMarioLand extends Game {
 		switch (mode) {
 		case Game:
 			switch (button) {
-			case UP:
+			case UP, BUTTON_1, BUTTON_2:
 				Jumpman.getInstance().setUp();
 			case LEFT:
 				Jumpman.getInstance().left = true;
@@ -203,7 +203,7 @@ class SuperMarioLand extends Game {
 		switch (mode) {
 		case Game:
 			switch (button) {
-			case UP:
+			case UP, BUTTON_1, BUTTON_2:
 				Jumpman.getInstance().up = false;
 			case LEFT:
 				Jumpman.getInstance().left = false;
