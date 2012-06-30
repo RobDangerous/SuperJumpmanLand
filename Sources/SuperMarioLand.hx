@@ -10,6 +10,7 @@ import kha.Music;
 import kha.Painter;
 import kha.Scene;
 import kha.Score;
+import kha.Tile;
 import kha.Tilemap;
 
 enum Mode {
@@ -21,7 +22,7 @@ enum Mode {
 class SuperMarioLand extends Game {
 	static var instance : SuperMarioLand;
 	var music : Music;
-	var tileColissions : Array<Bool>;
+	var tileColissions : Array<Tile>;
 	var map : Array<Array<Int>>;
 	var originalmap : Array<Array<Int>>;
 	var highscoreName : String;
@@ -42,8 +43,10 @@ class SuperMarioLand extends Game {
 	}
 
 	public override function init() {
-		tileColissions = new Array<Bool>();
-		for (i in 0...140) tileColissions.push(isCollidable(i));
+		tileColissions = new Array<Tile>();
+		for (i in 0...140) {
+			tileColissions.push(new Tile(i, isCollidable(i)));
+		}
 		var blob = Loader.getInstance().getBlob("level.map");
 		var levelWidth : Int = blob.readInt();
 		var levelHeight : Int = blob.readInt();
@@ -100,7 +103,7 @@ class SuperMarioLand extends Game {
 				}
 			}
 		}
-		music.start();
+	//	music.start();
 		Jumpman.getInstance().reset();
 		Scene.getInstance().addHero(Jumpman.getInstance());
 	}
@@ -148,7 +151,6 @@ class SuperMarioLand extends Game {
 	
 	public override function update() {
 		super.update();
-		music.update();
 		Scene.getInstance().camx = Std.int(Jumpman.getInstance().x) + Std.int(Jumpman.getInstance().width / 2);
 	}
 	
