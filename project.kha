@@ -1,0 +1,100 @@
+{
+	"format" : 1,
+	"assets" :
+	[
+		{
+			"id" : "9c8c0db0-d7cc-11e1-9b23-0800200c9a66",
+			"type" : "image",
+			"file" : "blockcoin.png"
+		},
+		{
+			"id" : "a7a42c00-d7cc-11e1-9b23-0800200c9a66",
+			"type" : "image",
+			"file" : "bonusblock.png"
+		},
+		{
+			"id" : "12116430-d7ce-11e1-9b23-0800200c9a66",
+			"type" : "image",
+			"file" : "coin.png"
+		},
+		{
+			"id" : "2348bd70-d7ce-11e1-9b23-0800200c9a66",
+			"type" : "image",
+			"file" : "fly.png"
+		},
+		{
+			"id" : "2348bd71-d7ce-11e1-9b23-0800200c9a66",
+			"type" : "image",
+			"file" : "gumba.png"
+		},
+		{
+			"id" : "2348bd72-d7ce-11e1-9b23-0800200c9a66",
+			"type" : "image",
+			"file" : "jumpman.png"
+		},
+		{
+			"id" : "2348bd73-d7ce-11e1-9b23-0800200c9a66",
+			"type" : "image",
+			"file" : "koopa.png"
+		},
+		{
+			"id" : "2348bd74-d7ce-11e1-9b23-0800200c9a66",
+			"type" : "image",
+			"file" : "sml_tiles.png"
+		},
+		{
+			"id" : "2348bd75-d7ce-11e1-9b23-0800200c9a66",
+			"type" : "sound",
+			"file": "coin"
+		},
+		{
+			"id": "2348bd76-d7ce-11e1-9b23-0800200c9a66",
+			"type": "sound",
+			"file": "die"
+		},
+		{
+			"id": "2348bd77-d7ce-11e1-9b23-0800200c9a66",
+			"type": "sound",
+			"file": "jump"
+		},
+		{
+			"id": "2348bd78-d7ce-11e1-9b23-0800200c9a66",
+			"type": "sound",
+			"file": "stomp"
+		},
+		{
+			"id": "2348bd79-d7ce-11e1-9b23-0800200c9a66",
+			"type": "music",
+			"file": "level1"
+		},
+		{
+			"id": "5c950390-d7ce-11e1-9b23-0800200c9a66",
+			"type": "blob",
+			"file": "level.map"
+		}
+	],
+	"rooms" :
+	[
+		{
+			"id" : "657f6c70-d7ce-11e1-9b23-0800200c9a66",
+			"name" : "level1",
+			"assets" :
+			[
+				"9c8c0db0-d7cc-11e1-9b23-0800200c9a66",
+				"a7a42c00-d7cc-11e1-9b23-0800200c9a66",
+				"12116430-d7ce-11e1-9b23-0800200c9a66",
+				"2348bd70-d7ce-11e1-9b23-0800200c9a66",
+				"2348bd71-d7ce-11e1-9b23-0800200c9a66",
+				"2348bd72-d7ce-11e1-9b23-0800200c9a66",
+				"2348bd73-d7ce-11e1-9b23-0800200c9a66",
+				"2348bd74-d7ce-11e1-9b23-0800200c9a66",
+				"2348bd75-d7ce-11e1-9b23-0800200c9a66",
+				"2348bd76-d7ce-11e1-9b23-0800200c9a66",
+				"2348bd77-d7ce-11e1-9b23-0800200c9a66",
+				"2348bd78-d7ce-11e1-9b23-0800200c9a66",
+				"2348bd79-d7ce-11e1-9b23-0800200c9a66",
+				"5c950390-d7ce-11e1-9b23-0800200c9a66"
+			]
+		}
+	]
+}
