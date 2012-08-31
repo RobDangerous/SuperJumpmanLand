@@ -1,50 +1,50 @@
 {
-	"format" : 1,
-	"assets" :
+	"format": 1,
+	"assets":
 	[
 		{
-			"id" : "9c8c0db0-d7cc-11e1-9b23-0800200c9a66",
-			"type" : "image",
-			"file" : "blockcoin.png"
+			"id": "9c8c0db0-d7cc-11e1-9b23-0800200c9a66",
+			"type": "image",
+			"file": "blockcoin.png"
 		},
 		{
-			"id" : "a7a42c00-d7cc-11e1-9b23-0800200c9a66",
-			"type" : "image",
-			"file" : "bonusblock.png"
+			"id": "a7a42c00-d7cc-11e1-9b23-0800200c9a66",
+			"type": "image",
+			"file": "bonusblock.png"
 		},
 		{
-			"id" : "12116430-d7ce-11e1-9b23-0800200c9a66",
-			"type" : "image",
-			"file" : "coin.png"
+			"id": "12116430-d7ce-11e1-9b23-0800200c9a66",
+			"type": "image",
+			"file": "coin.png"
 		},
 		{
-			"id" : "2348bd70-d7ce-11e1-9b23-0800200c9a66",
-			"type" : "image",
-			"file" : "fly.png"
+			"id": "2348bd70-d7ce-11e1-9b23-0800200c9a66",
+			"type": "image",
+			"file": "fly.png"
 		},
 		{
-			"id" : "2348bd71-d7ce-11e1-9b23-0800200c9a66",
-			"type" : "image",
-			"file" : "gumba.png"
+			"id": "2348bd71-d7ce-11e1-9b23-0800200c9a66",
+			"type": "image",
+			"file": "gumba.png"
 		},
 		{
-			"id" : "2348bd72-d7ce-11e1-9b23-0800200c9a66",
-			"type" : "image",
-			"file" : "jumpman.png"
+			"id": "2348bd72-d7ce-11e1-9b23-0800200c9a66",
+			"type": "image",
+			"file": "jumpman.png"
 		},
 		{
-			"id" : "2348bd73-d7ce-11e1-9b23-0800200c9a66",
-			"type" : "image",
-			"file" : "koopa.png"
+			"id": "2348bd73-d7ce-11e1-9b23-0800200c9a66",
+			"type": "image",
+			"file": "koopa.png"
 		},
 		{
-			"id" : "2348bd74-d7ce-11e1-9b23-0800200c9a66",
-			"type" : "image",
-			"file" : "sml_tiles.png"
+			"id": "2348bd74-d7ce-11e1-9b23-0800200c9a66",
+			"type": "image",
+			"file": "sml_tiles.png"
 		},
 		{
-			"id" : "2348bd75-d7ce-11e1-9b23-0800200c9a66",
-			"type" : "sound",
+			"id": "2348bd75-d7ce-11e1-9b23-0800200c9a66",
+			"type": "sound",
 			"file": "coin"
 		},
 		{
@@ -73,12 +73,12 @@
 			"file": "level.map"
 		}
 	],
-	"rooms" :
+	"rooms":
 	[
 		{
 			"id" : "657f6c70-d7ce-11e1-9b23-0800200c9a66",
-			"name" : "level1",
-			"assets" :
+			"name": "level1",
+			"assets":
 			[
 				"9c8c0db0-d7cc-11e1-9b23-0800200c9a66",
 				"a7a42c00-d7cc-11e1-9b23-0800200c9a66",
