@@ -41,8 +41,12 @@ class SuperMarioLand extends Game {
 	public static function getInstance() : SuperMarioLand {
 		return instance;
 	}
+	
+	public override function init(): Void {
+		Loader.the().loadRoom("level1", initLevel);
+	}
 
-	public override function init() {
+	public function initLevel(): Void {
 		tileColissions = new Array<Tile>();
 		for (i in 0...140) {
 			tileColissions.push(new Tile(i, isCollidable(i)));
@@ -151,10 +155,12 @@ class SuperMarioLand extends Game {
 	
 	public override function update() {
 		super.update();
+		if (Jumpman.getInstance() == null) return;
 		Scene.getInstance().camx = Std.int(Jumpman.getInstance().x) + Std.int(Jumpman.getInstance().width / 2);
 	}
 	
 	public override function render(painter : Painter) {
+		if (Jumpman.getInstance() == null) return;
 		switch (mode) {
 		case Highscore:
 			painter.setColor(255, 255, 255);
