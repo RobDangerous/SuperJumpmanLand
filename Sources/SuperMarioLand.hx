@@ -6,10 +6,12 @@ import kha.Game;
 import kha.HighscoreList;
 import kha.Key;
 import kha.Loader;
+import kha.LoadingScreen;
 import kha.Music;
 import kha.Painter;
 import kha.Scene;
 import kha.Score;
+import kha.System;
 import kha.Tile;
 import kha.Tilemap;
 
@@ -43,6 +45,7 @@ class SuperMarioLand extends Game {
 	}
 	
 	public override function init(): Void {
+		System.setScreen(new LoadingScreen(getWidth(), getHeight()));
 		Loader.the().loadRoom("level1", initLevel);
 	}
 
@@ -110,6 +113,7 @@ class SuperMarioLand extends Game {
 	//	music.start();
 		Jumpman.getInstance().reset();
 		Scene.getInstance().addHero(Jumpman.getInstance());
+		System.setScreen(this);
 	}
 	
 	public function showHighscore() {
