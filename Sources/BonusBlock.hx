@@ -32,7 +32,7 @@ class BonusBlock extends Sprite {
 		accy = 0;
 		washit = false;
 		downcount = 0;
-		collider = new Rectangle(0, 0, image.getWidth() / 2, image.getHeight() + 14);
+		collider = new Rectangle(0, 0, BonusBlock.image.getWidth() / 2, BonusBlock.image.getHeight() + 14);
 	}
 	
 	public override function update() {

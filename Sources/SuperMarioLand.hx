@@ -11,7 +11,7 @@ import kha.Music;
 import kha.Painter;
 import kha.Scene;
 import kha.Score;
-import kha.System;
+import kha.Configuration;
 import kha.Tile;
 import kha.Tilemap;
 
@@ -33,7 +33,7 @@ class SuperMarioLand extends Game {
 	var mode : Mode;
 	
 	public function new() {
-		super("SML", 600, 520);
+		super("SML", 600, 520, false);
 		instance = this;
 		shiftPressed = false;
 		highscoreName = "";
@@ -45,7 +45,7 @@ class SuperMarioLand extends Game {
 	}
 	
 	public override function init(): Void {
-		System.setScreen(new LoadingScreen(getWidth(), getHeight()));
+		Configuration.setScreen(new LoadingScreen(getWidth(), getHeight()));
 		Loader.the().loadRoom("level1", initLevel);
 	}
 
@@ -113,7 +113,7 @@ class SuperMarioLand extends Game {
 	//	music.start();
 		Jumpman.getInstance().reset();
 		Scene.getInstance().addHero(Jumpman.getInstance());
-		System.setScreen(this);
+		Configuration.setScreen(this);
 	}
 	
 	public function showHighscore() {
