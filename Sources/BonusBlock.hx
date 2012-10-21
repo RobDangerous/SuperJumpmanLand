@@ -18,8 +18,8 @@ class BonusBlock extends Sprite {
 	
 	static function init() {
 		if (!initialized) {
-			BonusBlock.image = Loader.getInstance().getImage("bonusblock.png");
-			sound = Loader.getInstance().getSound("coin");
+			BonusBlock.image = Loader.the.getImage("bonusblock.png");
+			sound = Loader.the.getSound("coin");
 			initialized = true;
 		}
 	}

@@ -33,7 +33,7 @@ class SuperMarioLand extends Game {
 	var mode : Mode;
 	
 	public function new() {
-		super("SML", 600, 520, false);
+		super("SML", false);
 		instance = this;
 		shiftPressed = false;
 		highscoreName = "";
@@ -45,8 +45,8 @@ class SuperMarioLand extends Game {
 	}
 	
 	public override function init(): Void {
-		Configuration.setScreen(new LoadingScreen(getWidth(), getHeight()));
-		Loader.the().loadRoom("level1", initLevel);
+		Configuration.setScreen(new LoadingScreen());
+		Loader.the.loadRoom("level1", initLevel);
 	}
 
 	public function initLevel(): Void {
@@ -54,7 +54,7 @@ class SuperMarioLand extends Game {
 		for (i in 0...140) {
 			tileColissions.push(new Tile(i, isCollidable(i)));
 		}
-		var blob = Loader.getInstance().getBlob("level.map");
+		var blob = Loader.the.getBlob("level.map");
 		var levelWidth : Int = blob.readInt();
 		var levelHeight : Int = blob.readInt();
 		originalmap = new Array<Array<Int>>();
@@ -71,7 +71,7 @@ class SuperMarioLand extends Game {
 				map[x].push(0);
 			}
 		}
-		music = Loader.getInstance().getMusic("level1");
+		music = Loader.the.getMusic("level1");
 		startGame();
 	}
 	
@@ -168,7 +168,7 @@ class SuperMarioLand extends Game {
 		switch (mode) {
 		case Highscore:
 			painter.setColor(255, 255, 255);
-			painter.fillRect(0, 0, getWidth(), getHeight());
+			painter.fillRect(0, 0, width, height);
 			painter.setColor(0, 0, 0);
 			var i : Int = 0;
 			while (i < 10 && i < getHighscores().getScores().length) {
@@ -180,17 +180,17 @@ class SuperMarioLand extends Game {
 			//break;
 		case EnterHighscore:
 			painter.setColor(255, 255, 255);
-			painter.fillRect(0, 0, getWidth(), getHeight());
+			painter.fillRect(0, 0, width, height);
 			painter.setColor(0, 0, 0);
-			painter.drawString("Enter your name", getWidth() / 2 - 100, 200);
-			painter.drawString(highscoreName, getWidth() / 2 - 50, 250);
+			painter.drawString("Enter your name", width / 2 - 100, 200);
+			painter.drawString(highscoreName, width / 2 - 50, 250);
 			//break;
 		case Game:
 			super.render(painter);
 			painter.translate(0, 0);
 			painter.setColor(0, 0, 0);
 			painter.drawString("Score: " + Std.string(Jumpman.getInstance().getScore()), 20, 25);
-			painter.drawString("Round: " + Std.string(Jumpman.getInstance().getRound()), getWidth() - 100, 25);
+			painter.drawString("Round: " + Std.string(Jumpman.getInstance().getRound()), width - 100, 25);
 			//break;
 		}
 	}

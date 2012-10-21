@@ -13,7 +13,7 @@ class Gumba extends Enemy {
 	
 	static function init() {
 		if (!initialized) {
-			image = Loader.getInstance().getImage("gumba.png");
+			image = Loader.the.getImage("gumba.png");
 			initialized = true;
 		}
 	}

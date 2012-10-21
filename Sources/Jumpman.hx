@@ -32,7 +32,7 @@ class Jumpman extends Sprite {
 	var round : Int;
 	
 	public function new(music : Music) {
-		super(Loader.getInstance().getImage("jumpman.png"), 16 * 4, 16 * 4, 0);
+		super(Loader.the.getImage("jumpman.png"), 16 * 4, 16 * 4, 0);
 		instance = this;
 		x = y = 50;
 		standing = false;
@@ -53,9 +53,9 @@ class Jumpman extends Sprite {
 		lookRight = true;
 		killed = false;
 		jumpcount = 0;
-		stompsound = Loader.getInstance().getSound("stomp");
-		jumpsound = Loader.getInstance().getSound("jump");
-		diesound = Loader.getInstance().getSound("die");
+		stompsound = Loader.the.getSound("stomp");
+		jumpsound = Loader.the.getSound("jump");
+		diesound = Loader.the.getSound("die");
 	}
 	
 	public static function getInstance() : Jumpman {
