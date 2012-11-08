@@ -77,11 +77,11 @@ class SuperMarioLand extends Game {
 	
 	public function startGame() {
 		if (Jumpman.getInstance() == null) new Jumpman(music);
-		Scene.getInstance().clear();
-		Scene.getInstance().setBackgroundColor(new Color(255, 255, 255));
+		Scene.the.clear();
+		Scene.the.setBackgroundColor(new Color(255, 255, 255));
 		var tilemap : Tilemap = new Tilemap("sml_tiles.png", 32, 32, map, tileColissions);
-		Scene.getInstance().setColissionMap(tilemap);
-		Scene.getInstance().addBackgroundTilemap(tilemap, 1);
+		Scene.the.setColissionMap(tilemap);
+		Scene.the.addBackgroundTilemap(tilemap, 1);
 		var TILE_WIDTH : Int = 32;
 		var TILE_HEIGHT : Int = 32;
 		for (x in 0...originalmap.length) {
@@ -89,22 +89,22 @@ class SuperMarioLand extends Game {
 				switch (originalmap[x][y]) {
 				case 15:
 					map[x][y] = 0;
-					Scene.getInstance().addEnemy(new Gumba(x * TILE_WIDTH, y * TILE_HEIGHT));
+					Scene.the.addEnemy(new Gumba(x * TILE_WIDTH, y * TILE_HEIGHT));
 				case 16:
 					map[x][y] = 0;
-					Scene.getInstance().addEnemy(new Koopa(x * TILE_WIDTH, y * TILE_HEIGHT - 16));
+					Scene.the.addEnemy(new Koopa(x * TILE_WIDTH, y * TILE_HEIGHT - 16));
 				case 17:
 					map[x][y] = 0;
-					Scene.getInstance().addEnemy(new Fly(x * TILE_WIDTH - 32, y * TILE_HEIGHT));
+					Scene.the.addEnemy(new Fly(x * TILE_WIDTH - 32, y * TILE_HEIGHT));
 				case 46:
 					map[x][y] = 0;
-					Scene.getInstance().addEnemy(new Coin(x * TILE_WIDTH, y * TILE_HEIGHT));
+					Scene.the.addEnemy(new Coin(x * TILE_WIDTH, y * TILE_HEIGHT));
 				case 52:
 					map[x][y] = 52;
-					Scene.getInstance().addEnemy(new Exit(x * TILE_WIDTH, y * TILE_HEIGHT));
+					Scene.the.addEnemy(new Exit(x * TILE_WIDTH, y * TILE_HEIGHT));
 				case 56:
 					map[x][y] = 1;
-					Scene.getInstance().addEnemy((new BonusBlock(x * TILE_WIDTH, y * TILE_HEIGHT)));
+					Scene.the.addEnemy((new BonusBlock(x * TILE_WIDTH, y * TILE_HEIGHT)));
 				default:
 					map[x][y] = originalmap[x][y];
 				}
@@ -112,12 +112,12 @@ class SuperMarioLand extends Game {
 		}
 	//	music.start();
 		Jumpman.getInstance().reset();
-		Scene.getInstance().addHero(Jumpman.getInstance());
+		Scene.the.addHero(Jumpman.getInstance());
 		Configuration.setScreen(this);
 	}
 	
 	public function showHighscore() {
-		Scene.getInstance().clear();
+		Scene.the.clear();
 		mode = Mode.EnterHighscore;
 		music.stop();
 	}
@@ -160,7 +160,7 @@ class SuperMarioLand extends Game {
 	public override function update() {
 		super.update();
 		if (Jumpman.getInstance() == null) return;
-		Scene.getInstance().camx = Std.int(Jumpman.getInstance().x) + Std.int(Jumpman.getInstance().width / 2);
+		Scene.the.camx = Std.int(Jumpman.getInstance().x) + Std.int(Jumpman.getInstance().width / 2);
 	}
 	
 	public override function render(painter : Painter) {

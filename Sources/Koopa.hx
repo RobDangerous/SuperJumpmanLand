@@ -38,7 +38,7 @@ class Koopa extends Enemy {
 	public override function update() {
 		if (killcount > 0) {
 			--killcount;
-			if (killcount == 0) Scene.getInstance().removeEnemy(this);
+			if (killcount == 0) Scene.the.removeEnemy(this);
 		}
 		super.update();
 	}

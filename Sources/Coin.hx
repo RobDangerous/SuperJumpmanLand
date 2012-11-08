@@ -29,7 +29,7 @@ class Coin extends Sprite {
 	
 	public override function hit(sprite : Sprite) {
 		sound.play();
-		Scene.getInstance().removeEnemy(this);
+		Scene.the.removeEnemy(this);
 		Jumpman.getInstance().selectCoin();
 	}
 }

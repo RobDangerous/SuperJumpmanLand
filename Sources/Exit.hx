@@ -12,7 +12,7 @@ class Exit extends Sprite {
 	}
 	
 	public override function hit(sprite : Sprite) {
-		Scene.getInstance().removeEnemy(this);
+		Scene.the.removeEnemy(this);
 		Jumpman.getInstance().nextRound();
 		SuperMarioLand.getInstance().startGame();
 	}

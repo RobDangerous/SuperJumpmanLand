@@ -52,7 +52,7 @@ class BonusBlock extends Sprite {
 			downcount = 8;
 			onehit = true;
 			washit = true;
-			Scene.getInstance().addEnemy(new BlockCoin(x + width / 2, y));
+			Scene.the.addEnemy(new BlockCoin(x + width / 2, y));
 			setAnimation(Animation.create(1));
 			Jumpman.getInstance().selectCoin();
 		}

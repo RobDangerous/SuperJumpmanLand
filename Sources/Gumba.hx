@@ -39,7 +39,7 @@ class Gumba extends Enemy {
 		super.update();
 		if (killcount > 0) {
 			--killcount;
-			if (killcount == 0) Scene.getInstance().removeEnemy(this);
+			if (killcount == 0) Scene.the.removeEnemy(this);
 		}
 	}
 	

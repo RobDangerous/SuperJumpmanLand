@@ -30,6 +30,6 @@ class BlockCoin extends Sprite {
 	
 	public override function update() {
 		--count;
-		if (count == 0) Scene.getInstance().removeEnemy(this);
+		if (count == 0) Scene.the.removeEnemy(this);
 	}
 }
