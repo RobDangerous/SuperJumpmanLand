@@ -1,3 +1,6 @@
 [submodule "Kha"]
 	path = Kha
 	url = https://git.ktxsoftware.com/git/Kha.git
+[submodule "Kt"]
+	path = Kt
+	url = https://git.ktxsoftware.com/git/Kt-Core.git
