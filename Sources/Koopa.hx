@@ -17,7 +17,7 @@ class Koopa extends Enemy {
 	
 	static function init() {
 		if (!initialized) {
-			image = Loader.the.getImage("koopa.png");
+			image = Loader.the.getImage("koopa");
 			initialized = true;
 		}
 	}

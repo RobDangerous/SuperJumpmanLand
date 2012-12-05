@@ -13,7 +13,7 @@ class Coin extends Sprite {
 	
 	static function init() {
 		if (!initialized) {
-			image = Loader.the.getImage("coin.png");
+			image = Loader.the.getImage("coin");
 			sound = Loader.the.getSound("coin");
 			initialized = true;
 		}

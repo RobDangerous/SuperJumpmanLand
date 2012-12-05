@@ -32,7 +32,7 @@ class Jumpman extends Sprite {
 	var round : Int;
 	
 	public function new(music : Music) {
-		super(Loader.the.getImage("jumpman.png"), 16 * 4, 16 * 4, 0);
+		super(Loader.the.getImage("jumpman"), 16 * 4, 16 * 4, 0);
 		instance = this;
 		x = y = 50;
 		standing = false;

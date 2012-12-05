@@ -18,7 +18,7 @@ class Fly extends Enemy {
 	
 	public static function init() {
 		if (!initialized) {
-			image = Loader.the.getImage("fly.png");
+			image = Loader.the.getImage("fly");
 			initialized = true;
 		}
 	}

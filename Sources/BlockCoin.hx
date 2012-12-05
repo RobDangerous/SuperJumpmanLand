@@ -12,7 +12,7 @@ class BlockCoin extends Sprite {
 	
 	static function init() {
 		if (!initialized) {
-			image = Loader.the.getImage("blockcoin.png");
+			image = Loader.the.getImage("blockcoin");
 			initialized = true;
 		}
 	}
