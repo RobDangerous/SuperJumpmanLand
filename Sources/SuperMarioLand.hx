@@ -95,7 +95,7 @@ class SuperMarioLand extends Game {
 					Scene.the.addEnemy(new Koopa(x * TILE_WIDTH, y * TILE_HEIGHT - 16));
 				case 17:
 					map[x][y] = 0;
-					Scene.the.addEnemy(new Fly(x * TILE_WIDTH - 32, y * TILE_HEIGHT));
+					Scene.the.addEnemy(new Fly(x * TILE_WIDTH - 32, y * TILE_HEIGHT - 8));
 				case 46:
 					map[x][y] = 0;
 					Scene.the.addEnemy(new Coin(x * TILE_WIDTH, y * TILE_HEIGHT));
