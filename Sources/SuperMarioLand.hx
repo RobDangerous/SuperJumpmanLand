@@ -78,7 +78,7 @@ class SuperMarioLand extends Game {
 	public function startGame() {
 		if (Jumpman.getInstance() == null) new Jumpman(music);
 		Scene.the.clear();
-		Scene.the.setBackgroundColor(new Color(255, 255, 255));
+		Scene.the.setBackgroundColor(Color.fromBytes(255, 255, 255));
 		var tilemap : Tilemap = new Tilemap("sml_tiles", 32, 32, map, tileColissions);
 		Scene.the.setColissionMap(tilemap);
 		Scene.the.addBackgroundTilemap(tilemap, 1);
