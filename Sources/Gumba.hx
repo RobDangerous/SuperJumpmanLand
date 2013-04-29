@@ -7,20 +7,20 @@ import kha.Loader;
 import kha.Scene;
 
 class Gumba extends Enemy {
-	static var image : Image;
-	var killcount : Int;
+	static var theimage: Image;
+	var killcount: Int;
 	static var initialized = false;
 	
 	static function init() {
 		if (!initialized) {
-			image = Loader.the.getImage("gumba");
+			theimage = Loader.the.getImage("gumba");
 			initialized = true;
 		}
 	}
 	
-	public function new(x : Int, y : Int) {
+	public function new(x: Int, y: Int) {
 		init();
-		super(Gumba.image, Std.int(96 / 3), 32);
+		super(Gumba.theimage, Std.int(96 / 3), 32);
 		this.x = x;
 		this.y = y;
 		setAnimation(new Animation([0, 2], 14));
@@ -43,7 +43,7 @@ class Gumba extends Enemy {
 		}
 	}
 	
-	public override function hitFrom(dir : Direction) {
+	public override function hitFrom(dir: Direction) {
 		if (dir == Direction.LEFT) {
 			speedx = -1 * Math.round(Math.pow(1.2, Jumpman.getInstance().getRound()));
 		}

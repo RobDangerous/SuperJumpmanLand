@@ -7,25 +7,25 @@ import kha.Loader;
 import kha.Rectangle;
 
 class Fly extends Enemy {
-	static var image : Image;
-	var killcount : Int;
-	var count : Int;
-	var jumping : Bool;
-	var left : Bool;
-	static var leftAnim : Animation = new Animation([0, 1], 8);
-	static var rightAnim : Animation = new Animation([4, 5], 8);
+	static var theimage: Image;
+	var killcount: Int;
+	var count: Int;
+	var jumping: Bool;
+	var left: Bool;
+	static var leftAnim: Animation = new Animation([0, 1], 8);
+	static var rightAnim: Animation = new Animation([4, 5], 8);
 	static var initialized = false;
 	
 	public static function init() {
 		if (!initialized) {
-			image = Loader.the.getImage("fly");
+			theimage = Loader.the.getImage("fly");
 			initialized = true;
 		}
 	}
 	
 	public function new(x : Int, y : Int) {
 		init();
-		super(Fly.image, 16 * 4, 56);
+		super(Fly.theimage, 16 * 4, 56);
 		this.x = x;
 		this.y = y;
 		setAnimation(leftAnim);

@@ -9,22 +9,22 @@ import kha.Scene;
 import kha.Sprite;
 
 class Koopa extends Enemy {
-	static var image : Image;
-	var killcount : Int;
-	var leftAnim : Animation;
-	var rightAnim : Animation;
+	static var theimage: Image;
+	var killcount: Int;
+	var leftAnim: Animation;
+	var rightAnim: Animation;
 	static var initialized = false;
 	
 	static function init() {
 		if (!initialized) {
-			image = Loader.the.getImage("koopa");
+			theimage = Loader.the.getImage("koopa");
 			initialized = true;
 		}
 	}
 	
-	public function new(x : Int, y : Int) {
+	public function new(x: Int, y: Int) {
 		init();
-		super(Koopa.image, 16 * 4, 48);
+		super(Koopa.theimage, 16 * 4, 48);
 		this.x = x;
 		this.y = y;
 		leftAnim = new Animation([0, 1], 10);

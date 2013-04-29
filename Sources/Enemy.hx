@@ -4,9 +4,9 @@ import kha.Image;
 import kha.Sprite;
 
 class Enemy extends Sprite {
-	var killed : Bool;
+	private var killed: Bool;
 	
-	public function new(image : Image, width : Int, height : Int) {
+	public function new(image: Image, width: Int, height: Int) {
 		super(image, width, height, 0);
 		killed = false;
 	}
@@ -15,11 +15,11 @@ class Enemy extends Sprite {
 		killed = true;
 	}
 	
-	public function isKilled() : Bool {
+	public function isKilled(): Bool {
 		return killed;
 	}
 	
-	public override function hit(sprite : Sprite) {
+	public override function hit(sprite: Sprite) {
 		Jumpman.getInstance().hitEnemy(this);
 	}
 }

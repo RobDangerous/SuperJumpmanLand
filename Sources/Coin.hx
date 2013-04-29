@@ -7,13 +7,13 @@ import kha.Sound;
 import kha.Sprite;
 
 class Coin extends Sprite {
-	private static var image : Image;
+	private static var theimage : Image;
 	private static var sound : Sound;
 	static var initialized = false;
 	
 	static function init() {
 		if (!initialized) {
-			image = Loader.the.getImage("coin");
+			theimage = Loader.the.getImage("coin");
 			sound = Loader.the.getSound("coin");
 			initialized = true;
 		}
@@ -21,7 +21,7 @@ class Coin extends Sprite {
 	
 	public function new(x : Int, y : Int) {
 		init();
-		super(Coin.image, 28, 32, 0);
+		super(Coin.theimage, 28, 32, 0);
 		this.x = x;
 		this.y = y;
 		accy = 0;

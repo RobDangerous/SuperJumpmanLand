@@ -9,16 +9,16 @@ import kha.Sound;
 import kha.Sprite;
 
 class BonusBlock extends Sprite {
-	static var image : Image;
-	static var sound : Sound;
-	var downcount : Int;
-	var washit : Bool;
-	static var onehit : Bool = false;
+	static var theimage: Image;
+	static var sound: Sound;
+	var downcount: Int;
+	var washit: Bool;
+	static var onehit: Bool = false;
 	static var initialized = false;
 	
 	static function init() {
 		if (!initialized) {
-			BonusBlock.image = Loader.the.getImage("bonusblock");
+			BonusBlock.theimage = Loader.the.getImage("bonusblock");
 			sound = Loader.the.getSound("coin");
 			initialized = true;
 		}
@@ -26,13 +26,13 @@ class BonusBlock extends Sprite {
 	
 	public function new(x : Float, y : Float) {
 		init();
-		super(BonusBlock.image, Std.int(BonusBlock.image.getWidth() / 2), BonusBlock.image.getHeight(), 0);
+		super(BonusBlock.theimage, Std.int(BonusBlock.theimage.getWidth() / 2), BonusBlock.theimage.getHeight(), 0);
 		this.x = x;
 		this.y = y;
 		accy = 0;
 		washit = false;
 		downcount = 0;
-		collider = new Rectangle(0, 0, BonusBlock.image.getWidth() / 2, BonusBlock.image.getHeight() + 14);
+		collider = new Rectangle(0, 0, BonusBlock.theimage.getWidth() / 2, BonusBlock.theimage.getHeight() + 14);
 	}
 	
 	public override function update() {
