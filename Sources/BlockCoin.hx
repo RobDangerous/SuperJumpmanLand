@@ -19,7 +19,7 @@ class BlockCoin extends Sprite {
 	
 	public function new(x : Float, y : Float) {
 		init();
-		super(BlockCoin.theimage, BlockCoin.theimage.getWidth(), BlockCoin.theimage.getHeight(), 0);
+		super(BlockCoin.theimage, BlockCoin.theimage.width, BlockCoin.theimage.height, 0);
 		accy = 0;
 		speedy = -2;
 		collides = false;

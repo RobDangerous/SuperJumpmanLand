@@ -26,13 +26,13 @@ class BonusBlock extends Sprite {
 	
 	public function new(x : Float, y : Float) {
 		init();
-		super(BonusBlock.theimage, Std.int(BonusBlock.theimage.getWidth() / 2), BonusBlock.theimage.getHeight(), 0);
+		super(BonusBlock.theimage, Std.int(BonusBlock.theimage.width / 2), BonusBlock.theimage.height, 0);
 		this.x = x;
 		this.y = y;
 		accy = 0;
 		washit = false;
 		downcount = 0;
-		collider = new Rectangle(0, 0, BonusBlock.theimage.getWidth() / 2, BonusBlock.theimage.getHeight() + 14);
+		collider = new Rectangle(0, 0, BonusBlock.theimage.width / 2, BonusBlock.theimage.height + 14);
 	}
 	
 	public override function update() {
