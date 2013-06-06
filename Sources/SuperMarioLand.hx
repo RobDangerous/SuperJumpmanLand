@@ -2,6 +2,8 @@ package;
 
 import kha.Button;
 import kha.Color;
+import kha.Font;
+import kha.FontStyle;
 import kha.Game;
 import kha.HighscoreList;
 import kha.Key;
@@ -29,6 +31,7 @@ class SuperMarioLand extends Game {
 	var originalmap : Array<Array<Int>>;
 	var highscoreName : String;
 	var shiftPressed : Bool;
+	private var font: Font;
 	
 	var mode : Mode;
 	
@@ -50,18 +53,19 @@ class SuperMarioLand extends Game {
 	}
 
 	public function initLevel(): Void {
+		font = Loader.the.loadFont("Arial", new FontStyle(false, false, false), 12);
 		tileColissions = new Array<Tile>();
 		for (i in 0...140) {
 			tileColissions.push(new Tile(i, isCollidable(i)));
 		}
 		var blob = Loader.the.getBlob("level.map");
-		var levelWidth : Int = blob.readInt();
-		var levelHeight : Int = blob.readInt();
+		var levelWidth: Int = blob.readS32BE();
+		var levelHeight: Int = blob.readS32BE();
 		originalmap = new Array<Array<Int>>();
 		for (x in 0...levelWidth) {
 			originalmap.push(new Array<Int>());
 			for (y in 0...levelHeight) {
-				originalmap[x].push(blob.readInt());
+				originalmap[x].push(blob.readS32BE());
 			}
 		}
 		map = new Array<Array<Int>>();
@@ -165,6 +169,7 @@ class SuperMarioLand extends Game {
 	
 	public override function render(painter : Painter) {
 		if (Jumpman.getInstance() == null) return;
+		painter.setFont(font);
 		switch (mode) {
 		case Highscore:
 			painter.setColor(255, 255, 255);
