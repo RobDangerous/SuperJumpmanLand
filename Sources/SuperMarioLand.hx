@@ -172,9 +172,9 @@ class SuperMarioLand extends Game {
 		painter.setFont(font);
 		switch (mode) {
 		case Highscore:
-			painter.setColor(255, 255, 255);
+			painter.setColor(Color.fromBytes(255, 255, 255));
 			painter.fillRect(0, 0, width, height);
-			painter.setColor(0, 0, 0);
+			painter.setColor(Color.fromBytes(0, 0, 0));
 			var i : Int = 0;
 			while (i < 10 && i < getHighscores().getScores().length) {
 				var score : Score = getHighscores().getScores()[i];
@@ -184,16 +184,16 @@ class SuperMarioLand extends Game {
 			}
 			//break;
 		case EnterHighscore:
-			painter.setColor(255, 255, 255);
+			painter.setColor(Color.fromBytes(255, 255, 255));
 			painter.fillRect(0, 0, width, height);
-			painter.setColor(0, 0, 0);
+			painter.setColor(Color.fromBytes(0, 0, 0));
 			painter.drawString("Enter your name", width / 2 - 100, 200);
 			painter.drawString(highscoreName, width / 2 - 50, 250);
 			//break;
 		case Game:
 			super.render(painter);
 			painter.translate(0, 0);
-			painter.setColor(0, 0, 0);
+			painter.setColor(Color.fromBytes(0, 0, 0));
 			painter.drawString("Score: " + Std.string(Jumpman.getInstance().getScore()), 20, 25);
 			painter.drawString("Round: " + Std.string(Jumpman.getInstance().getRound()), width - 100, 25);
 			//break;
