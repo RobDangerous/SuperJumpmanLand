@@ -14,6 +14,7 @@ import kha.Painter;
 import kha.Scene;
 import kha.Score;
 import kha.Configuration;
+import kha.Storage;
 import kha.Tile;
 import kha.Tilemap;
 
@@ -36,7 +37,7 @@ class SuperMarioLand extends Game {
 	var mode : Mode;
 	
 	public function new() {
-		super("SML", false);
+		super("SML", true);
 		instance = this;
 		shiftPressed = false;
 		highscoreName = "";
@@ -80,6 +81,7 @@ class SuperMarioLand extends Game {
 	}
 	
 	public function startGame() {
+		getHighscores().load(Storage.defaultFile());
 		if (Jumpman.getInstance() == null) new Jumpman(music);
 		Scene.the.clear();
 		Scene.the.setBackgroundColor(Color.fromBytes(255, 255, 255));
@@ -232,8 +234,8 @@ class SuperMarioLand extends Game {
 		}
 	}
 	
-	override public function keyDown(key : Key, char : String) : Void {
-		if (key == null) {
+	override public function keyDown(key: Key, char: String) : Void {
+		if (key == Key.CHAR) {
 			if (mode == Mode.EnterHighscore) {
 				if (highscoreName.length < 20) highscoreName += shiftPressed ? char.toUpperCase() : char.toLowerCase();
 			}
@@ -243,6 +245,7 @@ class SuperMarioLand extends Game {
 				switch (key) {
 				case ENTER:
 					getHighscores().addScore(highscoreName, Jumpman.getInstance().getScore());
+					getHighscores().save(Storage.defaultFile());
 					mode = Mode.Highscore;
 				case BACKSPACE:
 					highscoreName = highscoreName.substr(0, highscoreName.length - 1);
