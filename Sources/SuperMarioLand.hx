@@ -116,7 +116,7 @@ class SuperMarioLand extends Game {
 				}
 			}
 		}
-		music.play();
+		music.play(true);
 		Jumpman.getInstance().reset();
 		Scene.the.addHero(Jumpman.getInstance());
 		Configuration.setScreen(this);
