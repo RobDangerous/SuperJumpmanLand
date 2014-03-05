@@ -171,6 +171,7 @@ class SuperMarioLand extends Game {
 	
 	public override function render(painter : Painter) {
 		if (Jumpman.getInstance() == null) return;
+		startRender(painter);
 		painter.setFont(font);
 		switch (mode) {
 		case Highscore:
@@ -184,22 +185,20 @@ class SuperMarioLand extends Game {
 				painter.drawString(" -           " + Std.string(score.getScore()), 200, i * 30 + 100);
 				++i;
 			}
-			//break;
 		case EnterHighscore:
 			painter.setColor(Color.fromBytes(255, 255, 255));
 			painter.fillRect(0, 0, width, height);
 			painter.setColor(Color.fromBytes(0, 0, 0));
 			painter.drawString("Enter your name", width / 2 - 100, 200);
 			painter.drawString(highscoreName, width / 2 - 50, 250);
-			//break;
 		case Game:
-			super.render(painter);
+			scene.render(painter);
 			painter.translate(0, 0);
 			painter.setColor(Color.fromBytes(0, 0, 0));
 			painter.drawString("Score: " + Std.string(Jumpman.getInstance().getScore()), 20, 25);
 			painter.drawString("Round: " + Std.string(Jumpman.getInstance().getRound()), width - 100, 25);
-			//break;
 		}
+		endRender(painter);
 	}
 
 	override public function buttonDown(button : Button) : Void {
