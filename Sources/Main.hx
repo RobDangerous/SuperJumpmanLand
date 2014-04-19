@@ -1,9 +1,10 @@
-package ;
+package;
 
 import kha.Starter;
 
 class Main {
 	public static function main() {
-		new Starter().start(new SuperMarioLand());
+		var starter = new Starter();
+		starter.start(new SuperMarioLand());
 	}
 }
