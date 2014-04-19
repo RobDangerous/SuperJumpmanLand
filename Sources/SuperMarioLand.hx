@@ -260,18 +260,15 @@ class SuperMarioLand extends Game {
 	}
 
 	public override function mouseDown(x: Int, y: Int): Void {
-		x = painterTransformMouseX(x);
-		y = painterTransformMouseY(y);
-		if (x > width / 2) Jumpman.getInstance().setUp();
+		var xt = painterTransformMouseX(x, y);
+		if (xt > width / 2) Jumpman.getInstance().setUp();
 		else {
-			if (x < width / 4) Jumpman.getInstance().left = true;
+			if (xt < width / 4) Jumpman.getInstance().left = true;
 			else Jumpman.getInstance().right = true;
 		}
 	}
 	
 	public override function mouseUp(x : Int, y : Int) : Void {
-		x = painterTransformMouseX(x);
-		y = painterTransformMouseY(y);
 		Jumpman.getInstance().up = false;
 		Jumpman.getInstance().left = false;
 		Jumpman.getInstance().right = false;
