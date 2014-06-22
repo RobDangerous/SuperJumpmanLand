@@ -6,6 +6,7 @@ import kha.Font;
 import kha.FontStyle;
 import kha.Game;
 import kha.HighscoreList;
+import kha.input.Gamepad;
 import kha.Key;
 import kha.Loader;
 import kha.LoadingScreen;
@@ -110,7 +111,7 @@ class SuperMarioLand extends Game {
 					Scene.the.addEnemy(new Exit(x * TILE_WIDTH, y * TILE_HEIGHT));
 				case 56:
 					map[x][y] = 1;
-					Scene.the.addEnemy((new BonusBlock(x * TILE_WIDTH, y * TILE_HEIGHT)));
+					Scene.the.addEnemy(new BonusBlock(x * TILE_WIDTH, y * TILE_HEIGHT));
 				default:
 					map[x][y] = originalmap[x][y];
 				}
@@ -119,6 +120,9 @@ class SuperMarioLand extends Game {
 		music.play(true);
 		Jumpman.getInstance().reset();
 		Scene.the.addHero(Jumpman.getInstance());
+		
+		Gamepad.get(0).notify(axisListener, buttonListener);
+		
 		Configuration.setScreen(this);
 	}
 	
@@ -199,6 +203,50 @@ class SuperMarioLand extends Game {
 			painter.drawString("Round: " + Std.string(Jumpman.getInstance().getRound()), width - 100, 25);
 		}
 		endRender(painter);
+	}
+	
+	private function axisListener(axis: Int, value: Float): Void {
+		switch (axis) {
+			case 0:
+				if (value < -0.2) {
+					Jumpman.getInstance().left = true;
+					Jumpman.getInstance().right = false;
+				}
+				else if (value > 0.2) {
+					Jumpman.getInstance().right = true;
+					Jumpman.getInstance().left = false;
+				}
+				else {
+					Jumpman.getInstance().left = false;
+					Jumpman.getInstance().right = false;
+				}
+		}
+	}
+	
+	private function buttonListener(button: Int, value: Float): Void {
+		switch (button) {
+			case 0, 1, 2, 3:
+				if (value > 0.5) Jumpman.getInstance().setUp();
+				else Jumpman.getInstance().up = false;
+			case 14:
+				if (value > 0.5) {
+					Jumpman.getInstance().left = true;
+					Jumpman.getInstance().right = false;
+				}
+				else {
+					Jumpman.getInstance().left = false;
+					Jumpman.getInstance().right = false;
+				}
+			case 15:
+				if (value > 0.5) {
+					Jumpman.getInstance().right = true;
+					Jumpman.getInstance().left = false;
+				}
+				else {
+					Jumpman.getInstance().right = false;
+					Jumpman.getInstance().left = false;
+				}
+		}
 	}
 
 	override public function buttonDown(button : Button) : Void {
