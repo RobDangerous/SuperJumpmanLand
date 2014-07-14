@@ -4,12 +4,14 @@ import kha.Button;
 import kha.Color;
 import kha.Font;
 import kha.FontStyle;
+import kha.Framebuffer;
 import kha.Game;
 import kha.HighscoreList;
 import kha.input.Gamepad;
 import kha.Key;
 import kha.Loader;
 import kha.LoadingScreen;
+import kha.math.Matrix3;
 import kha.Music;
 import kha.Painter;
 import kha.Scene;
@@ -173,36 +175,37 @@ class SuperMarioLand extends Game {
 		Scene.the.camx = Std.int(Jumpman.getInstance().x) + Std.int(Jumpman.getInstance().width / 2);
 	}
 	
-	public override function render(painter : Painter) {
+	public override function render(frame: Framebuffer) {
 		if (Jumpman.getInstance() == null) return;
-		startRender(painter);
-		painter.setFont(font);
+		startRender(frame);
+		var g = frame.g2;
+		g.font = font;
 		switch (mode) {
 		case Highscore:
-			painter.setColor(Color.fromBytes(255, 255, 255));
-			painter.fillRect(0, 0, width, height);
-			painter.setColor(Color.fromBytes(0, 0, 0));
-			var i : Int = 0;
+			g.color = Color.White;
+			g.fillRect(0, 0, width, height);
+			g.color = Color.Black;
+			var i: Int = 0;
 			while (i < 10 && i < getHighscores().getScores().length) {
-				var score : Score = getHighscores().getScores()[i];
-				painter.drawString(Std.string(i + 1) + ": " + score.getName(), 100, i * 30 + 100);
-				painter.drawString(" -           " + Std.string(score.getScore()), 200, i * 30 + 100);
+				var score: Score = getHighscores().getScores()[i];
+				g.drawString(Std.string(i + 1) + ": " + score.getName(), 100, i * 30 + 100);
+				g.drawString(" -           " + Std.string(score.getScore()), 200, i * 30 + 100);
 				++i;
 			}
 		case EnterHighscore:
-			painter.setColor(Color.fromBytes(255, 255, 255));
-			painter.fillRect(0, 0, width, height);
-			painter.setColor(Color.fromBytes(0, 0, 0));
-			painter.drawString("Enter your name", width / 2 - 100, 200);
-			painter.drawString(highscoreName, width / 2 - 50, 250);
+			g.color = Color.White;
+			g.fillRect(0, 0, width, height);
+			g.color = Color.Black;
+			g.drawString("Enter your name", width / 2 - 100, 200);
+			g.drawString(highscoreName, width / 2 - 50, 250);
 		case Game:
-			scene.render(painter);
-			painter.translate(0, 0);
-			painter.setColor(Color.fromBytes(0, 0, 0));
-			painter.drawString("Score: " + Std.string(Jumpman.getInstance().getScore()), 20, 25);
-			painter.drawString("Round: " + Std.string(Jumpman.getInstance().getRound()), width - 100, 25);
+			//scene.render(painter);
+			g.transformation = Matrix3.identity();
+			g.color = Color.Black;
+			g.drawString("Score: " + Std.string(Jumpman.getInstance().getScore()), 20, 25);
+			g.drawString("Round: " + Std.string(Jumpman.getInstance().getRound()), width - 100, 25);
 		}
-		endRender(painter);
+		endRender(frame);
 	}
 	
 	private function axisListener(axis: Int, value: Float): Void {
