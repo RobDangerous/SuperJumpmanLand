@@ -199,7 +199,7 @@ class SuperMarioLand extends Game {
 			g.drawString("Enter your name", width / 2 - 100, 200);
 			g.drawString(highscoreName, width / 2 - 50, 250);
 		case Game:
-			//scene.render(painter);
+			scene.render(g);
 			g.transformation = Matrix3.identity();
 			g.color = Color.Black;
 			g.drawString("Score: " + Std.string(Jumpman.getInstance().getScore()), 20, 25);
