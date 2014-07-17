@@ -20,6 +20,7 @@ import kha.Scaler;
 import kha.Scene;
 import kha.Score;
 import kha.Configuration;
+import kha.ScreenRotation;
 import kha.Storage;
 import kha.Tile;
 import kha.Tilemap;
@@ -214,7 +215,7 @@ class SuperMarioLand extends Game {
 		g.end();
 		
 		startRender(frame);
-		Scaler.scale(backbuffer, frame.g2);
+		Scaler.scale(backbuffer, frame, kha.Sys.screenRotation);
 		endRender(frame);
 	}
 	
