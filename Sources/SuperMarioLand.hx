@@ -6,7 +6,9 @@ import kha.Font;
 import kha.FontStyle;
 import kha.Framebuffer;
 import kha.Game;
+import kha.graphics.TextureFormat;
 import kha.HighscoreList;
+import kha.Image;
 import kha.input.Gamepad;
 import kha.Key;
 import kha.Loader;
@@ -14,6 +16,7 @@ import kha.LoadingScreen;
 import kha.math.Matrix3;
 import kha.Music;
 import kha.Painter;
+import kha.Scaler;
 import kha.Scene;
 import kha.Score;
 import kha.Configuration;
@@ -36,6 +39,7 @@ class SuperMarioLand extends Game {
 	var highscoreName : String;
 	var shiftPressed : Bool;
 	private var font: Font;
+	private var backbuffer: Image;
 	
 	var mode : Mode;
 	
@@ -57,6 +61,7 @@ class SuperMarioLand extends Game {
 	}
 
 	public function initLevel(): Void {
+		backbuffer = kha.Sys.graphics.createRenderTargetTexture(640, 520, TextureFormat.RGBA32, false);
 		font = Loader.the.loadFont("Arial", new FontStyle(false, false, false), 12);
 		tileColissions = new Array<Tile>();
 		for (i in 0...140) {
@@ -177,8 +182,9 @@ class SuperMarioLand extends Game {
 	
 	public override function render(frame: Framebuffer) {
 		if (Jumpman.getInstance() == null) return;
-		startRender(frame);
-		var g = frame.g2;
+		
+		var g = backbuffer.g2;
+		g.begin();
 		g.font = font;
 		switch (mode) {
 		case Highscore:
@@ -205,6 +211,10 @@ class SuperMarioLand extends Game {
 			g.drawString("Score: " + Std.string(Jumpman.getInstance().getScore()), 20, 25);
 			g.drawString("Round: " + Std.string(Jumpman.getInstance().getRound()), width - 100, 25);
 		}
+		g.end();
+		
+		startRender(frame);
+		Scaler.scale(backbuffer, frame.g2);
 		endRender(frame);
 	}
 	
