@@ -6,7 +6,7 @@ import kha.Font;
 import kha.FontStyle;
 import kha.Framebuffer;
 import kha.Game;
-import kha.graphics.TextureFormat;
+import kha.graphics4.TextureFormat;
 import kha.HighscoreList;
 import kha.Image;
 import kha.input.Gamepad;
@@ -15,7 +15,6 @@ import kha.Loader;
 import kha.LoadingScreen;
 import kha.math.Matrix3;
 import kha.Music;
-import kha.Painter;
 import kha.Scaler;
 import kha.Scene;
 import kha.Score;
@@ -62,7 +61,7 @@ class SuperMarioLand extends Game {
 	}
 
 	public function initLevel(): Void {
-		backbuffer = kha.Sys.graphics.createRenderTargetTexture(640, 520, TextureFormat.RGBA32, false);
+		backbuffer = Image.createRenderTarget(600, 520);
 		font = Loader.the.loadFont("Arial", new FontStyle(false, false, false), 12);
 		tileColissions = new Array<Tile>();
 		for (i in 0...140) {
@@ -129,7 +128,7 @@ class SuperMarioLand extends Game {
 		Jumpman.getInstance().reset();
 		Scene.the.addHero(Jumpman.getInstance());
 		
-		Gamepad.get(0).notify(axisListener, buttonListener);
+		if (Gamepad.get(0) != null) Gamepad.get(0).notify(axisListener, buttonListener);
 		
 		Configuration.setScreen(this);
 	}
