@@ -1,5 +1,6 @@
 package;
 
+import haxe.Utf8;
 import kha.Button;
 import kha.Color;
 import kha.Font;
@@ -36,7 +37,8 @@ class SuperMarioLand extends Game {
 	var tileColissions : Array<Tile>;
 	var map : Array<Array<Int>>;
 	var originalmap : Array<Array<Int>>;
-	var highscoreName : String;
+	var highscoreName: String;
+	var highscoreNameLength: Int = 0;
 	var shiftPressed : Bool;
 	private var font: Font;
 	private var backbuffer: Image;
@@ -297,7 +299,10 @@ class SuperMarioLand extends Game {
 	override public function keyDown(key: Key, char: String) : Void {
 		if (key == Key.CHAR) {
 			if (mode == Mode.EnterHighscore) {
-				if (highscoreName.length < 20) highscoreName += shiftPressed ? char.toUpperCase() : char.toLowerCase();
+				if (highscoreName.length < 20) {
+					highscoreName += shiftPressed ? char.toUpperCase() : char.toLowerCase();
+					highscoreNameLength += 1;
+				}
 			}
 		}
 		else {
@@ -308,7 +313,10 @@ class SuperMarioLand extends Game {
 					getHighscores().save(Storage.defaultFile());
 					mode = Mode.Highscore;
 				case BACKSPACE:
-					highscoreName = highscoreName.substr(0, highscoreName.length - 1);
+					if (highscoreNameLength > 0) {
+						highscoreNameLength -= 1;
+						highscoreName = Utf8.sub(highscoreName, 0, highscoreNameLength);
+					}
 				default:
 				}
 			}
