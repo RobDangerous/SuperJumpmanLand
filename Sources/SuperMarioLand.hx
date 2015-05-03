@@ -17,8 +17,6 @@ import kha.Loader;
 import kha.LoadingScreen;
 import kha.math.Matrix3;
 import kha.Music;
-import kha.networking.Example;
-import kha.networking.Session;
 import kha.Scaler;
 import kha.Scene;
 import kha.Score;
@@ -93,14 +91,7 @@ class SuperMarioLand extends Game {
 		startGame();
 	}
 	
-	private var session: Session;
-	
 	public function startGame() {
-		session = new Session();
-		//var example = new Example();
-		//session.addEntity(example);
-		//session.sendState();
-		
 		getHighscores().load(Storage.defaultFile());
 		if (Jumpman.getInstance() == null) new Jumpman(music);
 		Scene.the.clear();
@@ -143,10 +134,6 @@ class SuperMarioLand extends Game {
 		if (Gamepad.get(0) != null) Gamepad.get(0).notify(axisListener, buttonListener);
 		
 		Configuration.setScreen(this);
-		
-		//var example = new Example();
-		//example._send(Bytes.alloc(100));
-		session.start();
 	}
 	
 	public function showHighscore() {

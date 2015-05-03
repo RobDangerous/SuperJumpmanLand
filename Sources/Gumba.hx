@@ -5,8 +5,6 @@ import kha.Animation;
 import kha.Direction;
 import kha.Image;
 import kha.Loader;
-import kha.networking.Entity;
-import kha.networking.Session;
 import kha.Scene;
 
 class Gumba extends Enemy {
@@ -30,9 +28,6 @@ class Gumba extends Enemy {
 		setAnimation(new Animation([0, 2], 14));
 		speedx = -1 * Math.round(Math.pow(1.2, Jumpman.getInstance().getRound()));
 		killcount = -1;
-		
-		_id = maxid++;
-		Session.the().addEntity(this);
 	}
 	
 	public override function kill() {
