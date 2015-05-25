@@ -2,6 +2,7 @@ package;
 
 import haxe.io.Bytes;
 import haxe.Utf8;
+import kha.audio1.Audio;
 import kha.Button;
 import kha.Color;
 import kha.Font;
@@ -127,7 +128,7 @@ class SuperMarioLand extends Game {
 				}
 			}
 		}
-		//music.play(true);
+		Audio.playMusic(music, true);
 		Jumpman.getInstance().reset();
 		Scene.the.addHero(Jumpman.getInstance());
 		

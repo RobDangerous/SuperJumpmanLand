@@ -1,6 +1,7 @@
 package;
 
 import kha.Animation;
+import kha.audio1.Audio;
 import kha.Direction;
 import kha.Loader;
 import kha.Music;
@@ -109,7 +110,7 @@ class Jumpman extends Sprite {
 				speedx = 0;
 			}
 			if (up && standing) {
-				jumpsound.play();
+				Audio.playSound(jumpsound);
 				setAnimation(lookRight ? jumpRight : jumpLeft);
 				speedy = -8.2;
 			}
@@ -138,7 +139,7 @@ class Jumpman extends Sprite {
 	
 	public function die() {
 		music.stop();
-		diesound.play();
+		Audio.playSound(diesound);
 		setAnimation(Animation.create(0));
 		speedy = -8;
 		speedx = 0;
@@ -150,7 +151,7 @@ class Jumpman extends Sprite {
 		if (killed) return;
 		if (enemy.isKilled()) return;
 		if (enemy.collisionRect().y + enemy.collisionRect().height > collisionRect().y + collisionRect().height + 4) {
-			stompsound.play();
+			Audio.playSound(stompsound);
 			enemy.kill();
 			speedy = -8;
 			jumpcount = 10;

@@ -1,5 +1,6 @@
 package;
 
+import kha.audio1.Audio;
 import kha.Image;
 import kha.Loader;
 import kha.Scene;
@@ -28,7 +29,7 @@ class Coin extends Sprite {
 	}
 	
 	public override function hit(sprite : Sprite) {
-		sound.play();
+		Audio.playSound(sound);
 		Scene.the.removeEnemy(this);
 		Jumpman.getInstance().selectCoin();
 	}
