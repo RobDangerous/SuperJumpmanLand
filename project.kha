@@ -5,6 +5,9 @@
 		"width": 600,
 		"height": 520
 	},
+	"libraries": [
+		"Kha2D"
+	],
 	"assets": [
 		{
 			"type": "image",
