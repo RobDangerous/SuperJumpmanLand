@@ -1,13 +1,13 @@
 package;
 
-import kha.Animation;
+import kha2d.Animation;
 import kha.audio1.Audio;
-import kha.Direction;
+import kha2d.Direction;
 import kha.Loader;
 import kha.Music;
 import kha.Rectangle;
 import kha.Sound;
-import kha.Sprite;
+import kha2d.Sprite;
 
 class Jumpman extends Sprite {
 	static var instance : Jumpman;

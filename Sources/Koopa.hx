@@ -1,12 +1,12 @@
 package;
 
-import kha.Animation;
-import kha.Direction;
+import kha2d.Animation;
+import kha2d.Direction;
 import kha.Image;
 import kha.Loader;
 import kha.Rectangle;
-import kha.Scene;
-import kha.Sprite;
+import kha2d.Scene;
+import kha2d.Sprite;
 
 class Koopa extends Enemy {
 	static var theimage: Image;

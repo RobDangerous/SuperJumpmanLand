@@ -1,7 +1,7 @@
 package;
 
-import kha.Scene;
-import kha.Sprite;
+import kha2d.Scene;
+import kha2d.Sprite;
 
 class Exit extends Sprite {
 	public function new(x : Int, y : Int) {

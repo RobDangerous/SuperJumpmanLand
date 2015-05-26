@@ -3,9 +3,9 @@ package;
 import kha.audio1.Audio;
 import kha.Image;
 import kha.Loader;
-import kha.Scene;
+import kha2d.Scene;
 import kha.Sound;
-import kha.Sprite;
+import kha2d.Sprite;
 
 class Coin extends Sprite {
 	private static var theimage : Image;

@@ -1,13 +1,13 @@
 package;
 
-import kha.Animation;
+import kha2d.Animation;
 import kha.audio1.Audio;
 import kha.Image;
 import kha.Loader;
 import kha.Rectangle;
-import kha.Scene;
+import kha2d.Scene;
 import kha.Sound;
-import kha.Sprite;
+import kha2d.Sprite;
 
 class BonusBlock extends Sprite {
 	static var theimage: Image;

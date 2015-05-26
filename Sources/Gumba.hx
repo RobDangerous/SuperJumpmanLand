@@ -1,11 +1,11 @@
 package;
 
 import haxe.io.Bytes;
-import kha.Animation;
-import kha.Direction;
+import kha2d.Animation;
+import kha2d.Direction;
 import kha.Image;
 import kha.Loader;
-import kha.Scene;
+import kha2d.Scene;
 
 class Gumba extends Enemy {
 	static var theimage: Image;

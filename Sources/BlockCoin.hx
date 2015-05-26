@@ -2,8 +2,8 @@ package;
 
 import kha.Image;
 import kha.Loader;
-import kha.Scene;
-import kha.Sprite;
+import kha2d.Scene;
+import kha2d.Sprite;
 
 class BlockCoin extends Sprite {
 	static var theimage: Image;

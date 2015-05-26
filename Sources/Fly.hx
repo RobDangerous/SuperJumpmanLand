@@ -1,7 +1,7 @@
 package;
 
-import kha.Animation;
-import kha.Direction;
+import kha2d.Animation;
+import kha2d.Direction;
 import kha.Image;
 import kha.Loader;
 import kha.Rectangle;

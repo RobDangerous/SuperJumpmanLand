@@ -19,13 +19,13 @@ import kha.LoadingScreen;
 import kha.math.Matrix3;
 import kha.Music;
 import kha.Scaler;
-import kha.Scene;
+import kha2d.Scene;
 import kha.Score;
 import kha.Configuration;
 import kha.ScreenRotation;
 import kha.Storage;
-import kha.Tile;
-import kha.Tilemap;
+import kha2d.Tile;
+import kha2d.Tilemap;
 
 enum Mode {
 	Game;
@@ -182,6 +182,7 @@ class SuperMarioLand extends Game {
 		super.update();
 		if (Jumpman.getInstance() == null) return;
 		Scene.the.camx = Std.int(Jumpman.getInstance().x) + Std.int(Jumpman.getInstance().width / 2);
+		Scene.the.update();
 	}
 	
 	public override function render(frame: Framebuffer) {
@@ -209,7 +210,7 @@ class SuperMarioLand extends Game {
 			g.drawString("Enter your name", width / 2 - 100, 200);
 			g.drawString(highscoreName, width / 2 - 50, 250);
 		case Game:
-			scene.render(g);
+			Scene.the.render(g);
 			g.transformation = Matrix3.identity();
 			g.color = Color.Black;
 			g.drawString("Score: " + Std.string(Jumpman.getInstance().getScore()), 20, 25);
