@@ -1,10 +1,10 @@
 package;
 
+import kha.audio1.MusicChannel;
 import kha2d.Animation;
 import kha.audio1.Audio;
 import kha2d.Direction;
 import kha.Loader;
-import kha.Music;
 import kha.Rectangle;
 import kha.Sound;
 import kha2d.Sprite;
@@ -28,11 +28,11 @@ class Jumpman extends Sprite {
 	var stompsound : Sound;
 	var jumpsound : Sound;
 	var diesound : Sound;
-	var music : Music;
-	var score : Int;
-	var round : Int;
+	var music: MusicChannel;
+	var score: Int;
+	var round: Int;
 	
-	public function new(music : Music) {
+	public function new(music: MusicChannel) {
 		super(Loader.the.getImage("jumpman"), 16 * 4, 16 * 4, 0);
 		instance = this;
 		x = y = 50;

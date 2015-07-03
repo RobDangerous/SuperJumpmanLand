@@ -3,6 +3,7 @@ package;
 import haxe.io.Bytes;
 import haxe.Utf8;
 import kha.audio1.Audio;
+import kha.audio1.MusicChannel;
 import kha.Button;
 import kha.Color;
 import kha.Font;
@@ -19,6 +20,7 @@ import kha.LoadingScreen;
 import kha.math.Matrix3;
 import kha.Music;
 import kha.Scaler;
+import kha.ScreenCanvas;
 import kha2d.Scene;
 import kha.Score;
 import kha.Configuration;
@@ -35,7 +37,8 @@ enum Mode {
 
 class SuperMarioLand extends Game {
 	static var instance : SuperMarioLand;
-	var music : Music;
+	private var music: Music;
+	private var channel: MusicChannel;
 	var tileColissions : Array<Tile>;
 	var map : Array<Array<Int>>;
 	var originalmap : Array<Array<Int>>;
@@ -94,7 +97,8 @@ class SuperMarioLand extends Game {
 	
 	public function startGame() {
 		getHighscores().load(Storage.defaultFile());
-		if (Jumpman.getInstance() == null) new Jumpman(music);
+		channel = Audio.playMusic(music, true);
+		if (Jumpman.getInstance() == null) new Jumpman(channel);
 		Scene.the.clear();
 		Scene.the.setBackgroundColor(Color.fromBytes(255, 255, 255));
 		var tilemap : Tilemap = new Tilemap("sml_tiles", 32, 32, map, tileColissions);
@@ -128,7 +132,6 @@ class SuperMarioLand extends Game {
 				}
 			}
 		}
-		Audio.playMusic(music, true);
 		Jumpman.getInstance().reset();
 		Scene.the.addHero(Jumpman.getInstance());
 		
@@ -140,7 +143,7 @@ class SuperMarioLand extends Game {
 	public function showHighscore() {
 		Scene.the.clear();
 		mode = Mode.EnterHighscore;
-		music.stop();
+		channel.stop();
 	}
 	
 	private static function isCollidable(tilenumber : Int) : Bool {
@@ -332,7 +335,7 @@ class SuperMarioLand extends Game {
 	}
 
 	public override function mouseDown(x: Int, y: Int): Void {
-		var xt = painterTransformMouseX(x, y);
+		var xt = Scaler.transformX(x, y, backbuffer, ScreenCanvas.the, ScreenRotation.RotationNone);
 		if (xt > width / 2) Jumpman.getInstance().setUp();
 		else {
 			if (xt < width / 4) Jumpman.getInstance().left = true;
