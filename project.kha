@@ -80,9 +80,10 @@
 			"name": "level.map"
 		},
 		{
-			"type": "blob",
-			"file": "Arial12.kravur",
-			"name": "Arial12.kravur"
+			"type": "font",
+			"file": "arial.ttf",
+			"size": 12,
+			"name": "Arial"
 		}
 	],
 	"rooms": [
