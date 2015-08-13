@@ -1,5 +1,5 @@
 {
-	"format": 2,
+	"format": 3,
 	"game": {
 		"name": "SML",
 		"width": 600,
@@ -51,27 +51,27 @@
 		},
 		{
 			"type": "sound",
-			"file": "coin",
+			"file": "coin.wav",
 			"name": "coin"
 		},
 		{
 			"type": "sound",
-			"file": "die",
+			"file": "die.wav",
 			"name": "die"
 		},
 		{
 			"type": "sound",
-			"file": "jump",
+			"file": "jump.wav",
 			"name": "jump"
 		},
 		{
 			"type": "sound",
-			"file": "stomp",
+			"file": "stomp.wav",
 			"name": "stomp"
 		},
 		{
 			"type": "music",
-			"file": "level1",
+			"file": "level1.wav",
 			"name": "level1"
 		},
 		{

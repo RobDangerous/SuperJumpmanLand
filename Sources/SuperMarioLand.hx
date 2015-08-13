@@ -17,6 +17,7 @@ import kha.input.Gamepad;
 import kha.Key;
 import kha.Loader;
 import kha.LoadingScreen;
+import kha.math.FastMatrix3;
 import kha.math.Matrix3;
 import kha.Music;
 import kha.Scaler;
@@ -214,7 +215,7 @@ class SuperMarioLand extends Game {
 			g.drawString(highscoreName, width / 2 - 50, 250);
 		case Game:
 			Scene.the.render(g);
-			g.transformation = Matrix3.identity();
+			g.transformation = FastMatrix3.identity();
 			g.color = Color.Black;
 			g.drawString("Score: " + Std.string(Jumpman.getInstance().getScore()), 20, 25);
 			g.drawString("Round: " + Std.string(Jumpman.getInstance().getRound()), width - 100, 25);
