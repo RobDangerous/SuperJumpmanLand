@@ -1,28 +1,18 @@
 package;
 
 import haxe.io.Bytes;
+import kha.Assets;
 import kha2d.Animation;
 import kha2d.Direction;
 import kha.Image;
-import kha.Loader;
 import kha2d.Scene;
 
 class Gumba extends Enemy {
-	static var theimage: Image;
-	var killcount: Int;
-	static var initialized = false;
+	private var killcount: Int;
 	static private var maxid = 0;
 	
-	static function init() {
-		if (!initialized) {
-			theimage = Loader.the.getImage("gumba");
-			initialized = true;
-		}
-	}
-	
 	public function new(x: Int, y: Int) {
-		init();
-		super(Gumba.theimage, Std.int(96 / 3), 32);
+		super(Assets.images.gumba, Std.int(96 / 3), 32);
 		this.x = x;
 		this.y = y;
 		setAnimation(new Animation([0, 2], 14));

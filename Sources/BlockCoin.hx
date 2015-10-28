@@ -1,25 +1,15 @@
 package;
 
+import kha.Assets;
 import kha.Image;
-import kha.Loader;
 import kha2d.Scene;
 import kha2d.Sprite;
 
 class BlockCoin extends Sprite {
-	static var theimage: Image;
-	var count: Int;
-	static var initialized = false;
-	
-	static function init() {
-		if (!initialized) {
-			theimage = Loader.the.getImage("blockcoin");
-			initialized = true;
-		}
-	}
-	
-	public function new(x : Float, y : Float) {
-		init();
-		super(BlockCoin.theimage, BlockCoin.theimage.width, BlockCoin.theimage.height, 0);
+	private var count: Int;
+
+	public function new(x: Float, y: Float) {
+		super(Assets.images.blockcoin, Assets.images.blockcoin.width, Assets.images.blockcoin.height, 0);
 		accy = 0;
 		speedy = -2;
 		collides = false;

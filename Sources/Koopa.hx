@@ -1,30 +1,20 @@
 package;
 
+import kha.Assets;
 import kha2d.Animation;
 import kha2d.Direction;
 import kha.Image;
-import kha.Loader;
 import kha.Rectangle;
 import kha2d.Scene;
 import kha2d.Sprite;
 
 class Koopa extends Enemy {
-	static var theimage: Image;
-	var killcount: Int;
-	var leftAnim: Animation;
-	var rightAnim: Animation;
-	static var initialized = false;
-	
-	static function init() {
-		if (!initialized) {
-			theimage = Loader.the.getImage("koopa");
-			initialized = true;
-		}
-	}
+	private var killcount: Int;
+	private var leftAnim: Animation;
+	private var rightAnim: Animation;
 	
 	public function new(x: Int, y: Int) {
-		init();
-		super(Koopa.theimage, 16 * 4, 48);
+		super(Assets.images.koopa, 16 * 4, 48);
 		this.x = x;
 		this.y = y;
 		leftAnim = new Animation([0, 1], 10);

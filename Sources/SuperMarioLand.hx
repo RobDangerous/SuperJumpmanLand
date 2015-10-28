@@ -4,27 +4,26 @@ import haxe.io.Bytes;
 import haxe.Utf8;
 import kha.audio1.Audio;
 import kha.audio1.MusicChannel;
+import kha.Blob;
 import kha.Button;
 import kha.Color;
 import kha.Font;
 import kha.FontStyle;
 import kha.Framebuffer;
-import kha.Game;
 import kha.graphics4.TextureFormat;
-import kha.HighscoreList;
 import kha.Image;
 import kha.input.Gamepad;
 import kha.Key;
-import kha.Loader;
-import kha.LoadingScreen;
+import kha.Assets;
 import kha.math.FastMatrix3;
 import kha.math.Matrix3;
 import kha.Music;
 import kha.Scaler;
 import kha.ScreenCanvas;
+import kha.Sound;
+import kha.System;
 import kha2d.Scene;
 import kha.Score;
-import kha.Configuration;
 import kha.ScreenRotation;
 import kha.Storage;
 import kha2d.Tile;
@@ -36,46 +35,116 @@ enum Mode {
 	EnterHighscore;
 }
 
-class SuperMarioLand extends Game {
-	static var instance : SuperMarioLand;
+class SuperMarioLand {
+	static var instance: SuperMarioLand;
 	private var music: Music;
 	private var channel: MusicChannel;
-	var tileColissions : Array<Tile>;
-	var map : Array<Array<Int>>;
+	var tileColissions: Array<Tile>;
+	var map: Array<Array<Int>>;
 	var originalmap : Array<Array<Int>>;
 	var highscoreName: String;
 	var highscoreNameLength: Int = 0;
 	var shiftPressed : Bool;
 	private var font: Font;
 	private var backbuffer: Image;
+	private static inline var width: Int = 600;
+	private static inline var height: Int = 520;
 	
-	var mode : Mode;
+	public static var blobs: Map<String, Blob> = new Map();
+	public static var musics: Map<String, Music> = new Map();
+	public static var sounds: Map<String, Sound> = new Map();
+	public static var images: Map<String, Image> = new Map();
+	
+	private var mode: Mode;
 	
 	public function new() {
-		super("SML", true);
+		//super("SML", true);
 		instance = this;
 		shiftPressed = false;
 		highscoreName = "";
 		mode = Mode.Game;
+		loadAssets(initLevel);
 	}
 	
 	public static function getInstance() : SuperMarioLand {
 		return instance;
 	}
 	
-	public override function init(): Void {
-		Configuration.setScreen(new LoadingScreen());
-		Loader.the.loadRoom("level1", initLevel);
+	private function loadBlobs(blobNames: Array<String>, blobs: Map<String, Blob>, done: Void -> Void): Void {
+		var name = blobNames.pop();
+		Assets.loadBlob(name, function (blob: Blob) {
+			blobs[name] = blob;
+			if (blobNames.length == 0) {
+				done();
+			}
+			else {
+				loadBlobs(blobNames, blobs, done);
+			}
+		});
+	}
+	
+	private function loadMusic(musicNames: Array<String>, music: Map<String, Music>, done: Void -> Void): Void {
+		var name = musicNames.pop();
+		Assets.loadMusic(name, function (m: Music) {
+			music[name] = m;
+			if (musicNames.length == 0) {
+				done();
+			}
+			else {
+				loadMusic(musicNames, music, done);
+			}
+		});
+	}
+	
+	private function loadSounds(soundNames: Array<String>, sounds: Map<String, Sound>, done: Void -> Void): Void {
+		var name = soundNames.pop();
+		Assets.loadSound(name, function (sound: Sound) {
+			sounds[name] = sound;
+			if (soundNames.length == 0) {
+				done();
+			}
+			else {
+				loadSounds(soundNames, sounds, done);
+			}
+		});
+	}
+	
+	private function loadImages(imageNames: Array<String>, images: Map<String, Image>, done: Void -> Void): Void {
+		var name = imageNames.pop();
+		Assets.loadImage(name, function (image: Image) {
+			images[name] = image;
+			if (imageNames.length == 0) {
+				done();
+			}
+			else {
+				loadImages(imageNames, images, done);
+			}
+		});
+	}
+	
+	private function loadAssets(done: Void -> Void) {
+		loadBlobs(["level.map"], blobs, function () {
+			loadMusic(["level1"], musics, function () {
+				loadSounds(["stomp", "jump", "die", "coin"], sounds, function () {
+					loadImages(["sml_tiles", "jumpman", "gumba", "koopa", "fly", "coin", "blockcoin", "bonusblock"], images, function () {
+						Assets.loadFont("Arial", FontStyle.Default, 12, function (font: Font) {
+							this.font = font;
+							done();
+						});
+					});
+				});
+			});
+		});
 	}
 
 	public function initLevel(): Void {
+		Scene.the.setSize(600, 520);
 		backbuffer = Image.createRenderTarget(600, 520);
-		font = Loader.the.loadFont("Arial", new FontStyle(false, false, false), 12);
 		tileColissions = new Array<Tile>();
 		for (i in 0...140) {
 			tileColissions.push(new Tile(i, isCollidable(i)));
 		}
-		var blob = Loader.the.getBlob("level.map");
+		var blob = blobs["level.map"];
 		var levelWidth: Int = blob.readS32BE();
 		var levelHeight: Int = blob.readS32BE();
 		originalmap = new Array<Array<Int>>();
@@ -92,17 +161,17 @@ class SuperMarioLand extends Game {
 				map[x].push(0);
 			}
 		}
-		music = Loader.the.getMusic("level1");
+		music = musics["level1"];
 		startGame();
 	}
 	
 	public function startGame() {
-		getHighscores().load(Storage.defaultFile());
+		//getHighscores().load(Storage.defaultFile());
 		channel = Audio.playMusic(music, true);
 		if (Jumpman.getInstance() == null) new Jumpman(channel);
 		Scene.the.clear();
 		Scene.the.setBackgroundColor(Color.fromBytes(255, 255, 255));
-		var tilemap : Tilemap = new Tilemap("sml_tiles", 32, 32, map, tileColissions);
+		var tilemap = new Tilemap(images["sml_tiles"], 32, 32, map, tileColissions);
 		Scene.the.setColissionMap(tilemap);
 		Scene.the.addBackgroundTilemap(tilemap, 1);
 		var TILE_WIDTH : Int = 32;
@@ -137,8 +206,6 @@ class SuperMarioLand extends Game {
 		Scene.the.addHero(Jumpman.getInstance());
 		
 		if (Gamepad.get(0) != null) Gamepad.get(0).notify(axisListener, buttonListener);
-		
-		Configuration.setScreen(this);
 	}
 	
 	public function showHighscore() {
@@ -182,14 +249,13 @@ class SuperMarioLand extends Game {
 		}
 	}
 	
-	public override function update() {
-		super.update();
+	public function update() {
 		if (Jumpman.getInstance() == null) return;
 		Scene.the.camx = Std.int(Jumpman.getInstance().x) + Std.int(Jumpman.getInstance().width / 2);
 		Scene.the.update();
 	}
 	
-	public override function render(frame: Framebuffer) {
+	public function render(frame: Framebuffer) {
 		if (Jumpman.getInstance() == null) return;
 		
 		var g = backbuffer.g2;
@@ -200,13 +266,13 @@ class SuperMarioLand extends Game {
 			g.color = Color.White;
 			g.fillRect(0, 0, width, height);
 			g.color = Color.Black;
-			var i: Int = 0;
+			/*var i: Int = 0;
 			while (i < 10 && i < getHighscores().getScores().length) {
 				var score: Score = getHighscores().getScores()[i];
 				g.drawString(Std.string(i + 1) + ": " + score.getName(), 100, i * 30 + 100);
 				g.drawString(" -           " + Std.string(score.getScore()), 200, i * 30 + 100);
 				++i;
-			}
+			}*/
 		case EnterHighscore:
 			g.color = Color.White;
 			g.fillRect(0, 0, width, height);
@@ -222,9 +288,9 @@ class SuperMarioLand extends Game {
 		}
 		g.end();
 		
-		startRender(frame);
-		Scaler.scale(backbuffer, frame, kha.Sys.screenRotation);
-		endRender(frame);
+		frame.g2.begin();
+		Scaler.scale(backbuffer, frame, System.screenRotation);
+		frame.g2.end();
 	}
 	
 	private function axisListener(axis: Int, value: Float): Void {
@@ -271,7 +337,7 @@ class SuperMarioLand extends Game {
 		}
 	}
 
-	override public function buttonDown(button : Button) : Void {
+	/*override public function buttonDown(button : Button) : Void {
 		switch (mode) {
 		case Game:
 			switch (button) {
@@ -348,5 +414,5 @@ class SuperMarioLand extends Game {
 		Jumpman.getInstance().up = false;
 		Jumpman.getInstance().left = false;
 		Jumpman.getInstance().right = false;
-	}
+	}*/
 }

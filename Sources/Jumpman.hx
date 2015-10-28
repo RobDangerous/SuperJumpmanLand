@@ -1,39 +1,36 @@
 package;
 
+import kha.Assets;
 import kha.audio1.MusicChannel;
 import kha2d.Animation;
 import kha.audio1.Audio;
 import kha2d.Direction;
-import kha.Loader;
 import kha.Rectangle;
 import kha.Sound;
 import kha2d.Sprite;
 
 class Jumpman extends Sprite {
-	static var instance : Jumpman;
-	public var left : Bool;
-	public var right : Bool;
-	public var up : Bool;
-	var lookRight : Bool;
-	var standing : Bool;
-	var killed : Bool;
-	var jumpcount : Int;
-	var lastupcount : Int;
-	var walkLeft : Animation;
-	var walkRight : Animation;
-	var standLeft : Animation;
-	var standRight : Animation;
-	var jumpLeft : Animation;
-	var jumpRight : Animation;
-	var stompsound : Sound;
-	var jumpsound : Sound;
-	var diesound : Sound;
+	static var instance: Jumpman;
+	public var left: Bool;
+	public var right: Bool;
+	public var up: Bool;
+	var lookRight: Bool;
+	var standing: Bool;
+	var killed: Bool;
+	var jumpcount: Int;
+	var lastupcount: Int;
+	var walkLeft: Animation;
+	var walkRight: Animation;
+	var standLeft: Animation;
+	var standRight: Animation;
+	var jumpLeft: Animation;
+	var jumpRight: Animation;
 	var music: MusicChannel;
 	var score: Int;
 	var round: Int;
 	
 	public function new(music: MusicChannel) {
-		super(Loader.the.getImage("jumpman"), 16 * 4, 16 * 4, 0);
+		super(Assets.images.jumpman, 16 * 4, 16 * 4, 0);
 		instance = this;
 		x = y = 50;
 		standing = false;
@@ -54,9 +51,6 @@ class Jumpman extends Sprite {
 		lookRight = true;
 		killed = false;
 		jumpcount = 0;
-		stompsound = Loader.the.getSound("stomp");
-		jumpsound = Loader.the.getSound("jump");
-		diesound = Loader.the.getSound("die");
 	}
 	
 	public static function getInstance() : Jumpman {
@@ -110,7 +104,7 @@ class Jumpman extends Sprite {
 				speedx = 0;
 			}
 			if (up && standing) {
-				Audio.playSound(jumpsound);
+				Audio.playSound(Assets.sounds.jump);
 				setAnimation(lookRight ? jumpRight : jumpLeft);
 				speedy = -8.2;
 			}
@@ -129,7 +123,7 @@ class Jumpman extends Sprite {
 		lastupcount = 8;
 	}
 	
-	public override function hitFrom(dir : Direction) {
+	public override function hitFrom(dir: Direction) {
 		if (dir == Direction.UP) {
 			standing = true;
 			if (lastupcount < 1) up = false;
@@ -137,9 +131,9 @@ class Jumpman extends Sprite {
 		else if (dir == Direction.DOWN) speedy = 0;
 	}
 	
-	public function die() {
+	public function die(): Void {
 		music.stop();
-		Audio.playSound(diesound);
+		Audio.playSound(Assets.sounds.die);
 		setAnimation(Animation.create(0));
 		speedy = -8;
 		speedx = 0;
@@ -147,11 +141,11 @@ class Jumpman extends Sprite {
 		killed = true;
 	}
 	
-	public function hitEnemy(enemy : Enemy) {
+	public function hitEnemy(enemy: Enemy): Void {
 		if (killed) return;
 		if (enemy.isKilled()) return;
 		if (enemy.collisionRect().y + enemy.collisionRect().height > collisionRect().y + collisionRect().height + 4) {
-			Audio.playSound(stompsound);
+			Audio.playSound(Assets.sounds.stomp);
 			enemy.kill();
 			speedy = -8;
 			jumpcount = 10;

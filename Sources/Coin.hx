@@ -1,35 +1,22 @@
 package;
 
+import kha.Assets;
 import kha.audio1.Audio;
 import kha.Image;
-import kha.Loader;
 import kha2d.Scene;
 import kha.Sound;
 import kha2d.Sprite;
 
 class Coin extends Sprite {
-	private static var theimage : Image;
-	private static var sound : Sound;
-	static var initialized = false;
-	
-	static function init() {
-		if (!initialized) {
-			theimage = Loader.the.getImage("coin");
-			sound = Loader.the.getSound("coin");
-			initialized = true;
-		}
-	}
-	
-	public function new(x : Int, y : Int) {
-		init();
-		super(Coin.theimage, 28, 32, 0);
+	public function new(x: Int, y: Int) {
+		super(Assets.images.coin, 28, 32, 0);
 		this.x = x;
 		this.y = y;
 		accy = 0;
 	}
 	
-	public override function hit(sprite : Sprite) {
-		Audio.playSound(sound);
+	public override function hit(sprite: Sprite) {
+		Audio.playSound(Assets.sounds.coin);
 		Scene.the.removeEnemy(this);
 		Jumpman.getInstance().selectCoin();
 	}

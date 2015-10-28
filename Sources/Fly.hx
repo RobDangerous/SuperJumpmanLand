@@ -1,31 +1,21 @@
 package;
 
+import kha.Assets;
 import kha2d.Animation;
 import kha2d.Direction;
 import kha.Image;
-import kha.Loader;
 import kha.Rectangle;
 
 class Fly extends Enemy {
-	static var theimage: Image;
-	var killcount: Int;
-	var count: Int;
-	var jumping: Bool;
-	var left: Bool;
+	private var killcount: Int;
+	private var count: Int;
+	private var jumping: Bool;
+	private var left: Bool;
 	static var leftAnim: Animation = new Animation([0, 1], 8);
 	static var rightAnim: Animation = new Animation([4, 5], 8);
-	static var initialized = false;
 	
-	public static function init() {
-		if (!initialized) {
-			theimage = Loader.the.getImage("fly");
-			initialized = true;
-		}
-	}
-	
-	public function new(x : Int, y : Int) {
-		init();
-		super(Fly.theimage, 16 * 4, 56);
+	public function new(x: Int, y: Int) {
+		super(Assets.images.fly, 16 * 4, 56);
 		this.x = x;
 		this.y = y;
 		setAnimation(leftAnim);
@@ -67,7 +57,7 @@ class Fly extends Enemy {
 		killcount = 60;
 	}
 	
-	public override function hitFrom(dir : Direction) {
+	public override function hitFrom(dir: Direction) {
 		if (dir == Direction.LEFT && !killed) {
 			setAnimation(leftAnim);
 			left = true;
