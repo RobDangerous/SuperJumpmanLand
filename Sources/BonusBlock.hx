@@ -4,7 +4,7 @@ import kha.Assets;
 import kha2d.Animation;
 import kha.audio1.Audio;
 import kha.Image;
-import kha.Rectangle;
+import kha2d.Rectangle;
 import kha2d.Scene;
 import kha.Sound;
 import kha2d.Sprite;
@@ -36,7 +36,7 @@ class BonusBlock extends Sprite {
 	
 	public override function hit(sprite: Sprite) {
 		if (!washit && !onehit && downcount == 0 && sprite.speedy < 0) {
-			Audio.playSound(Assets.sounds.coin);
+			Audio.play(Assets.sounds.coin);
 			y -= 20;
 			downcount = 8;
 			onehit = true;

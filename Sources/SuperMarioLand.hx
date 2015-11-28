@@ -3,7 +3,7 @@ package;
 import haxe.io.Bytes;
 import haxe.Utf8;
 import kha.audio1.Audio;
-import kha.audio1.MusicChannel;
+import kha.audio1.AudioChannel;
 import kha.Blob;
 import kha.Button;
 import kha.Color;
@@ -17,7 +17,6 @@ import kha.Key;
 import kha.Assets;
 import kha.math.FastMatrix3;
 import kha.math.Matrix3;
-import kha.Music;
 import kha.Scaler;
 import kha.ScreenCanvas;
 import kha.Sound;
@@ -37,106 +36,31 @@ enum Mode {
 
 class SuperMarioLand {
 	static var instance: SuperMarioLand;
-	private var music: Music;
-	private var channel: MusicChannel;
+	private var music: Sound;
+	private var channel: AudioChannel;
 	var tileColissions: Array<Tile>;
 	var map: Array<Array<Int>>;
 	var originalmap : Array<Array<Int>>;
 	var highscoreName: String;
 	var highscoreNameLength: Int = 0;
 	var shiftPressed : Bool;
-	private var font: Font;
 	private var backbuffer: Image;
 	private static inline var width: Int = 600;
 	private static inline var height: Int = 520;
-	
-	public static var blobs: Map<String, Blob> = new Map();
-	public static var musics: Map<String, Music> = new Map();
-	public static var sounds: Map<String, Sound> = new Map();
-	public static var images: Map<String, Image> = new Map();
-	
 	private var mode: Mode;
 	
 	public function new() {
-		//super("SML", true);
 		instance = this;
 		shiftPressed = false;
 		highscoreName = "";
 		mode = Mode.Game;
-		loadAssets(initLevel);
+		Assets.loadEverything(initLevel);
 	}
 	
 	public static function getInstance() : SuperMarioLand {
 		return instance;
 	}
 	
-	private function loadBlobs(blobNames: Array<String>, blobs: Map<String, Blob>, done: Void -> Void): Void {
-		var name = blobNames.pop();
-		Assets.loadBlob(name, function (blob: Blob) {
-			blobs[name] = blob;
-			if (blobNames.length == 0) {
-				done();
-			}
-			else {
-				loadBlobs(blobNames, blobs, done);
-			}
-		});
-	}
-	
-	private function loadMusic(musicNames: Array<String>, music: Map<String, Music>, done: Void -> Void): Void {
-		var name = musicNames.pop();
-		Assets.loadMusic(name, function (m: Music) {
-			music[name] = m;
-			if (musicNames.length == 0) {
-				done();
-			}
-			else {
-				loadMusic(musicNames, music, done);
-			}
-		});
-	}
-	
-	private function loadSounds(soundNames: Array<String>, sounds: Map<String, Sound>, done: Void -> Void): Void {
-		var name = soundNames.pop();
-		Assets.loadSound(name, function (sound: Sound) {
-			sounds[name] = sound;
-			if (soundNames.length == 0) {
-				done();
-			}
-			else {
-				loadSounds(soundNames, sounds, done);
-			}
-		});
-	}
-	
-	private function loadImages(imageNames: Array<String>, images: Map<String, Image>, done: Void -> Void): Void {
-		var name = imageNames.pop();
-		Assets.loadImage(name, function (image: Image) {
-			images[name] = image;
-			if (imageNames.length == 0) {
-				done();
-			}
-			else {
-				loadImages(imageNames, images, done);
-			}
-		});
-	}
-	
-	private function loadAssets(done: Void -> Void) {
-		loadBlobs(["level.map"], blobs, function () {
-			loadMusic(["level1"], musics, function () {
-				loadSounds(["stomp", "jump", "die", "coin"], sounds, function () {
-					loadImages(["sml_tiles", "jumpman", "gumba", "koopa", "fly", "coin", "blockcoin", "bonusblock"], images, function () {
-						Assets.loadFont("Arial", FontStyle.Default, 12, function (font: Font) {
-							this.font = font;
-							done();
-						});
-					});
-				});
-			});
-		});
-	}
-
 	public function initLevel(): Void {
 		Scene.the.setSize(600, 520);
 		backbuffer = Image.createRenderTarget(600, 520);
@@ -144,14 +68,15 @@ class SuperMarioLand {
 		for (i in 0...140) {
 			tileColissions.push(new Tile(i, isCollidable(i)));
 		}
-		var blob = blobs["level.map"];
-		var levelWidth: Int = blob.readS32BE();
-		var levelHeight: Int = blob.readS32BE();
+		var blob = Assets.blobs.level;
+		var position: Int = 0;
+		var levelWidth: Int = blob.readS32BE(position); position += 4;
+		var levelHeight: Int = blob.readS32BE(position); position += 4;
 		originalmap = new Array<Array<Int>>();
 		for (x in 0...levelWidth) {
 			originalmap.push(new Array<Int>());
 			for (y in 0...levelHeight) {
-				originalmap[x].push(blob.readS32BE());
+				originalmap[x].push(blob.readS32BE(position)); position += 4;
 			}
 		}
 		map = new Array<Array<Int>>();
@@ -161,17 +86,17 @@ class SuperMarioLand {
 				map[x].push(0);
 			}
 		}
-		music = musics["level1"];
+		music = Assets.sounds.level1;
 		startGame();
 	}
 	
 	public function startGame() {
 		//getHighscores().load(Storage.defaultFile());
-		channel = Audio.playMusic(music, true);
+		channel = Audio.play(music, true);
 		if (Jumpman.getInstance() == null) new Jumpman(channel);
 		Scene.the.clear();
 		Scene.the.setBackgroundColor(Color.fromBytes(255, 255, 255));
-		var tilemap = new Tilemap(images["sml_tiles"], 32, 32, map, tileColissions);
+		var tilemap = new Tilemap(Assets.images.sml_tiles, 32, 32, map, tileColissions);
 		Scene.the.setColissionMap(tilemap);
 		Scene.the.addBackgroundTilemap(tilemap, 1);
 		var TILE_WIDTH : Int = 32;
@@ -260,7 +185,7 @@ class SuperMarioLand {
 		
 		var g = backbuffer.g2;
 		g.begin();
-		g.font = font;
+		g.font = Assets.fonts.arial;
 		switch (mode) {
 		case Highscore:
 			g.color = Color.White;

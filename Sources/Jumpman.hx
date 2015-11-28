@@ -1,11 +1,11 @@
 package;
 
 import kha.Assets;
-import kha.audio1.MusicChannel;
+import kha.audio1.AudioChannel;
 import kha2d.Animation;
 import kha.audio1.Audio;
 import kha2d.Direction;
-import kha.Rectangle;
+import kha2d.Rectangle;
 import kha.Sound;
 import kha2d.Sprite;
 
@@ -25,11 +25,11 @@ class Jumpman extends Sprite {
 	var standRight: Animation;
 	var jumpLeft: Animation;
 	var jumpRight: Animation;
-	var music: MusicChannel;
+	var music: AudioChannel;
 	var score: Int;
 	var round: Int;
 	
-	public function new(music: MusicChannel) {
+	public function new(music: AudioChannel) {
 		super(Assets.images.jumpman, 16 * 4, 16 * 4, 0);
 		instance = this;
 		x = y = 50;
@@ -104,7 +104,7 @@ class Jumpman extends Sprite {
 				speedx = 0;
 			}
 			if (up && standing) {
-				Audio.playSound(Assets.sounds.jump);
+				Audio.play(Assets.sounds.jump);
 				setAnimation(lookRight ? jumpRight : jumpLeft);
 				speedy = -8.2;
 			}
@@ -133,7 +133,7 @@ class Jumpman extends Sprite {
 	
 	public function die(): Void {
 		music.stop();
-		Audio.playSound(Assets.sounds.die);
+		Audio.play(Assets.sounds.die);
 		setAnimation(Animation.create(0));
 		speedy = -8;
 		speedx = 0;
@@ -145,7 +145,7 @@ class Jumpman extends Sprite {
 		if (killed) return;
 		if (enemy.isKilled()) return;
 		if (enemy.collisionRect().y + enemy.collisionRect().height > collisionRect().y + collisionRect().height + 4) {
-			Audio.playSound(Assets.sounds.stomp);
+			Audio.play(Assets.sounds.stomp);
 			enemy.kill();
 			speedy = -8;
 			jumpcount = 10;

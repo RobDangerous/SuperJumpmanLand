@@ -4,7 +4,7 @@ import kha.Assets;
 import kha2d.Animation;
 import kha2d.Direction;
 import kha.Image;
-import kha.Rectangle;
+import kha2d.Rectangle;
 import kha2d.Scene;
 import kha2d.Sprite;
 

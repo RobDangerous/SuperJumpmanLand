@@ -16,7 +16,7 @@ class Coin extends Sprite {
 	}
 	
 	public override function hit(sprite: Sprite) {
-		Audio.playSound(Assets.sounds.coin);
+		Audio.play(Assets.sounds.coin);
 		Scene.the.removeEnemy(this);
 		Jumpman.getInstance().selectCoin();
 	}
