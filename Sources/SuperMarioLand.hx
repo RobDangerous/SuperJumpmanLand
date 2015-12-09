@@ -5,7 +5,6 @@ import haxe.Utf8;
 import kha.audio1.Audio;
 import kha.audio1.AudioChannel;
 import kha.Blob;
-import kha.Button;
 import kha.Color;
 import kha.Font;
 import kha.FontStyle;
@@ -68,7 +67,7 @@ class SuperMarioLand {
 		for (i in 0...140) {
 			tileColissions.push(new Tile(i, isCollidable(i)));
 		}
-		var blob = Assets.blobs.level;
+		var blob = Assets.blobs.level_map;
 		var position: Int = 0;
 		var levelWidth: Int = blob.readS32BE(position); position += 4;
 		var levelHeight: Int = blob.readS32BE(position); position += 4;
