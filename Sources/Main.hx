@@ -6,7 +6,7 @@ import kha.System;
 
 class Main {
 	public static function main() {
-		System.init("SML", 600, 520, initialized);
+		System.init({title: "SML", width: 600, height: 520}, initialized);
 	}
 	
 	private static function initialized(): Void {
