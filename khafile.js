@@ -1,4 +1,4 @@
-var project = new Project('SML');
+let project = new Project('SML');
 
 project.addLibrary('Kha2D');
 
@@ -8,4 +8,4 @@ project.addSources('Sources');
 
 project.addDefine('BLA');
 
-return project;
+resolve(project);
