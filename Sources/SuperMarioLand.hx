@@ -13,8 +13,8 @@ import kha.graphics4.TextureFormat;
 import kha.Image;
 import kha.input.Gamepad;
 import kha.input.Keyboard;
+import kha.input.KeyCode;
 import kha.input.Mouse;
-import kha.Key;
 import kha.Assets;
 import kha.math.FastMatrix3;
 import kha.math.Matrix3;
@@ -44,7 +44,6 @@ class SuperMarioLand {
 	var originalmap : Array<Array<Int>>;
 	var highscoreName: String;
 	var highscoreNameLength: Int = 0;
-	var shiftPressed : Bool;
 	private var backbuffer: Image;
 	private static inline var width: Int = 600;
 	private static inline var height: Int = 520;
@@ -52,7 +51,6 @@ class SuperMarioLand {
 	
 	public function new() {
 		instance = this;
-		shiftPressed = false;
 		highscoreName = "";
 		mode = Mode.Game;
 		Assets.loadEverything(initLevel);
@@ -132,7 +130,7 @@ class SuperMarioLand {
 		Scene.the.addHero(Jumpman.getInstance());
 		
 		if (Gamepad.get() != null) Gamepad.get().notify(axisListener, buttonListener);
-		if (Keyboard.get() != null) Keyboard.get().notify(keyDown, keyUp);
+		if (Keyboard.get() != null) Keyboard.get().notify(keyDown, keyUp, keyPress);
 		if (Mouse.get() != null) Mouse.get().notify(mouseDown, mouseUp, null, null);
 	}
 	
@@ -265,61 +263,57 @@ class SuperMarioLand {
 		}
 	}
 
-	private function keyDown(key: Key, char: String): Void {
+	private function keyDown(key: KeyCode): Void {
 		switch (mode) {
 		case Game:
 			switch (key) {
-			case UP:
+			case Up:
 				Jumpman.getInstance().setUp();
-			case LEFT:
+			case Left:
 				Jumpman.getInstance().left = true;
-			case RIGHT:
+			case Right:
 				Jumpman.getInstance().right = true;
 			default:
 			}
 		case EnterHighscore:
-			if (key == Key.CHAR) {
-				if (highscoreName.length < 20) {
-					highscoreName += shiftPressed ? char.toUpperCase() : char.toLowerCase();
-					highscoreNameLength += 1;
-				}
-			}
-			else {
-				if (highscoreName.length > 0) {
-					switch (key) {
-					case ENTER:
-						//getHighscores().addScore(highscoreName, Jumpman.getInstance().getScore());
-						//getHighscores().save(Storage.defaultFile());
-						mode = Mode.Highscore;
-					case BACKSPACE:
-						if (highscoreNameLength > 0) {
-							highscoreNameLength -= 1;
-							highscoreName = Utf8.sub(highscoreName, 0, highscoreNameLength);
-						}
-					default:
+			if (highscoreName.length > 0) {
+				switch (key) {
+				case Return:
+					//getHighscores().addScore(highscoreName, Jumpman.getInstance().getScore());
+					//getHighscores().save(Storage.defaultFile());
+					mode = Mode.Highscore;
+				case Backspace:
+					if (highscoreNameLength > 0) {
+						highscoreNameLength -= 1;
+						highscoreName = Utf8.sub(highscoreName, 0, highscoreNameLength);
 					}
+				default:
 				}
-				if (key == SHIFT) shiftPressed = true;
 			}
 		default:
 		}
 	}
 	
-	private function keyUp(key: Key, char: String): Void {
+	private function keyUp(key: KeyCode): Void {
 		switch (mode) {
 		case Game:
 			switch (key) {
-			case UP:
+			case Up:
 				Jumpman.getInstance().up = false;
-			case LEFT:
+			case Left:
 				Jumpman.getInstance().left = false;
-			case RIGHT:
+			case Right:
 				Jumpman.getInstance().right = false;
 			default:
 			}	
-		case EnterHighscore:
-			if (key != null && key == Key.SHIFT) shiftPressed = false;
 		default:
+		}
+	}
+
+	function keyPress(character: String): Void {
+		if (mode == Mode.EnterHighscore && highscoreName.length < 20) {
+			highscoreName += character;
+			highscoreNameLength += 1;
 		}
 	}
 	
