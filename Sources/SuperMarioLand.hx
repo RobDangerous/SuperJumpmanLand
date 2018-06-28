@@ -23,7 +23,6 @@ import kha.ScreenCanvas;
 import kha.Sound;
 import kha.System;
 import kha2d.Scene;
-import kha.Score;
 import kha.ScreenRotation;
 import kha.Storage;
 import kha2d.Tile;
