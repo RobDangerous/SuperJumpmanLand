@@ -180,7 +180,7 @@ class SuperMarioLand {
 		Scene.the.update();
 	}
 	
-	public function render(frame: Framebuffer) {
+	public function render(frames: Array<Framebuffer>) {
 		if (Jumpman.getInstance() == null) return;
 		
 		var g = backbuffer.g2;
@@ -213,9 +213,9 @@ class SuperMarioLand {
 		}
 		g.end();
 		
-		frame.g2.begin();
-		Scaler.scale(backbuffer, frame, System.screenRotation);
-		frame.g2.end();
+		frames[0].g2.begin();
+		Scaler.scale(backbuffer, frames[0], System.screenRotation);
+		frames[0].g2.end();
 	}
 	
 	private function axisListener(axis: Int, value: Float): Void {
@@ -284,7 +284,7 @@ class SuperMarioLand {
 				case Backspace:
 					if (highscoreNameLength > 0) {
 						highscoreNameLength -= 1;
-						highscoreName = Utf8.sub(highscoreName, 0, highscoreNameLength);
+						highscoreName = highscoreName.substr(0, highscoreNameLength);
 					}
 				default:
 				}
