@@ -1,8 +1,8 @@
 [submodule "Kha"]
 	path = Kha
-	url = ../Kha
-	branch = master
+	url = https://github.com/Kode/Kha
+	branch = main
 [submodule "Libraries/Kha2D"]
 	path = Libraries/Kha2D
-	url = ../Kha2D
-	branch = master
+	url = https://github.com/Kha-Samples/Kha2D
+	branch = main
